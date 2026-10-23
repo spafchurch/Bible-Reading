@@ -114,7 +114,6 @@
             text-decoration: line-through;
             color: #bdc3c7;
         }
-        /* 新增 Gateway Bible 按鈕樣式 */
         .gateway-btn {
             display: inline-block;
             margin-top: 12px;
@@ -160,7 +159,6 @@
 </div>
 
 <script>
-    // 已加入 Gateway Bible 專屬連結 (和合本 CUV)
     const schedule = {
         1: { verses: "出三 13-15 / 詩 99 / 士 9-10", book: "合1冊 150", url: "https://www.biblegateway.com/passage/?search=出埃及記+13:15,詩篇+99,士師記+9:10&version=CUV" },
         2: { verses: "太一 20-23 / 詩 100 / 士 11-12", book: "耶和華拯救 12冊 50", url: "https://www.biblegateway.com/passage/?search=馬太福音+1:20-23,詩篇+100,士師記+11:12&version=CUV" },
@@ -204,8 +202,12 @@
     const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
 
+    // 【已修正】自動獲取手機本地當天日期，避免時區誤差
     const today = new Date();
-    datePicker.value = today.toISOString().split('T')[0];
+    const currentYear = today.getFullYear();
+    const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+    const currentDay = String(today.getDate()).padStart(2, '0');
+    datePicker.value = `${currentYear}-${currentMonth}-${currentDay}`;
 
     function getStorageKey(dateStr) {
         return 'bible_record_' + dateStr;
@@ -239,7 +241,6 @@
         const data = schedule[day];
         if (data) {
             dayTitle.innerText = `第 ${day} 日`;
-            // 將經文同 Gateway Bible 按鈕結合
             versesText.innerHTML = `
                 ${data.verses}
                 <br>
@@ -278,6 +279,7 @@
         updateProgress(dateObj.getFullYear(), dateObj.getMonth() + 1);
     });
 
+    // 首次載入時，自動載入當天數據
     loadDayData(datePicker.value);
 
 </script>
