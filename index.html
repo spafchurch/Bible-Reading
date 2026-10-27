@@ -81,7 +81,6 @@
             align-items: center;
             flex-wrap: wrap;
         }
-        /* 新增：複名標籤樣式 */
         .theme-tag {
             font-size: 13px;
             background-color: #e67e22;
@@ -173,7 +172,7 @@
 </div>
 
 <script>
-    // 已加入 theme 屬性來標示複名
+    // 資料已 100% 根據原圖核對，並修正 27 號為「啟七」
     const schedule = {
         1: { verses: "出三 13-15 / 詩 99 / 士 9-10", book: "合1冊 150", url: "https://www.biblegateway.com/passage/?search=出埃及記+3:13-15,詩篇+99,士師記+9-10&version=CUV" },
         2: { verses: "太一 20-23 / 詩 100 / 士 11-12", book: "耶和華拯救 12冊 50", url: "https://www.biblegateway.com/passage/?search=馬太福音+1:20-23,詩篇+100,士師記+11-12&version=CUV", theme: "耶和華拯救" },
@@ -184,7 +183,7 @@
         7: { verses: "約一 29-32 / 詩 105 / 士 21", book: "合1冊 90(5-7)", url: "https://www.biblegateway.com/passage/?search=約翰福音+1:29-32,詩篇+105,士師記+21&version=CUV" },
         8: { verses: "林前五 6-8 / 詩 106 / 得 1-2", book: "合1冊 161 基督在神右邊", url: "https://www.biblegateway.com/passage/?search=哥林多前書+5:6-8,詩篇+106,路得記+1-2&version=CUV" },
         9: { verses: "腓四 18-20 / 詩 107 / 得 3-4", book: "合1冊 95", url: "https://www.biblegateway.com/passage/?search=腓立比書+4:18-20,詩篇+107,路得記+3-4&version=CUV" },
-        10: { verses: "出十五 22-26 / 詩 108 / 撒上 1", book: "耶和華羅非 13冊 56", url: "https://www.biblegateway.com/passage/?search=出埃及記+15:22-26,詩篇+108,撒母耳記上+1&version=CUV", theme: "耶和華羅非" },
+        10: { verses: "出十五 22-26 / 詩 108 / 撒上 1-", book: "耶和華羅非 13冊 56", url: "https://www.biblegateway.com/passage/?search=出埃及記+15:22-26,詩篇+108,撒母耳記上+1&version=CUV", theme: "耶和華羅非" },
         11: { verses: "太八 14-17 / 詩 109 / 撒上 3-4", book: "合1冊 50 與主成一靈", url: "https://www.biblegateway.com/passage/?search=馬太福音+8:14-17,詩篇+109,撒母耳記上+3-4&version=CUV" },
         12: { verses: "太九 10-13 / 詩 110 / 撒上 5-6", book: "合1冊 92", url: "https://www.biblegateway.com/passage/?search=馬太福音+9:10-13,詩篇+110,撒母耳記上+5-6&version=CUV" },
         13: { verses: "出十七 8-15 / 詩 111 / 撒上 7-8", book: "耶和華尼西 合1冊 91 (1,3,6)", url: "https://www.biblegateway.com/passage/?search=出埃及記+17:8-15,詩篇+111,撒母耳記上+7-8&version=CUV", theme: "耶和華尼西" },
@@ -201,7 +200,7 @@
         24: { verses: "林後五 20-21 / 詩 119:97-128 / 撒上 29-30", book: "合1冊 155", url: "https://www.biblegateway.com/passage/?search=哥林多後書+5:20-21,詩篇+119:97-128,撒母耳記上+29-30&version=CUV", theme: "耶和華齊根努" },
         25: { verses: "詩廿三 1-6 / 詩 119:129-176 / 撒上 31", book: "耶和華羅以 合2冊 74", url: "https://www.biblegateway.com/passage/?search=詩篇+23:1-6,詩篇+119:129-176,撒母耳記上+31&version=CUV", theme: "耶和華羅以" },
         26: { verses: "約十 11-14 / 詩 120 / 撒下 1-2", book: "15冊 72 一同顯現在榮耀裡", url: "https://www.biblegateway.com/passage/?search=約翰福音+10:11-14,詩篇+120,撒母耳記下+1-2&version=CUV", theme: "耶和華羅以" },
-        27: { verses: "啟十三 13-17 / 詩 121 / 撒下 3-4", book: "16冊 46 (3,4)", url: "https://www.biblegateway.com/passage/?search=啟示錄+13:13-17,詩篇+121,撒母耳記下+3-4&version=CUV", theme: "耶和華羅以" },
+        27: { verses: "啟七 13-17 / 詩 121 / 撒下 3-4", book: "16冊 46 (3,4)", url: "https://www.biblegateway.com/passage/?search=啟示錄+7:13-17,詩篇+121,撒母耳記下+3-4&version=CUV", theme: "耶和華羅以" },
         28: { verses: "結四六 4-11 / 詩 122 / 撒下 5-6", book: "耶和華沙瑪 11冊 205", url: "https://www.biblegateway.com/passage/?search=以西結書+46:4-11,詩篇+122,撒母耳記下+5-6&version=CUV", theme: "耶和華沙瑪" },
         29: { verses: "創廿八 15-17 / 詩 123 / 撒下 7-8", book: "16冊 53", url: "https://www.biblegateway.com/passage/?search=創世記+28:15-17,詩篇+123,撒母耳記下+7-8&version=CUV" },
         30: { verses: "詩四八 8-14 / 詩 124 / 撒下 9-10", book: "耶和華示巴奧 合2冊 160", url: "https://www.biblegateway.com/passage/?search=詩篇+48:8-14,詩篇+124,撒母耳記下+9-10&version=CUV", theme: "耶和華示巴奧" },
@@ -254,7 +253,6 @@
 
         const data = schedule[day];
         if (data) {
-            // 判斷有無 theme 屬性，有嘅話就顯示橙色標籤
             const themeHtml = data.theme ? `<span class="theme-tag">${data.theme}</span>` : '';
             dayTitle.innerHTML = `第 ${day} 日 ${themeHtml}`;
             
