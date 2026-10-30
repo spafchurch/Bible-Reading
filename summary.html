@@ -112,7 +112,7 @@
         
         /* 第二欄：親近主默想 */
         .col-meditate {
-            width: 115px;
+            width: 105px; /* 稍微收窄少少，留空間畀詩歌 */
             flex-shrink: 0;
             color: #2980b9;
             font-weight: bold;
@@ -128,20 +128,18 @@
         
         /* 第四欄：詩歌 */
         .col-song {
-            width: 130px; /* 稍微加闊以容納主題字 */
+            width: 170px; /* 加闊以容納主題字同詩歌名 */
             flex-shrink: 0;
-            color: #c0392b;
-            font-weight: 500;
             font-size: 13.5px;
             text-align: right;
+            white-space: nowrap; /* 強制不換行，保持緊湊 */
         }
 
-        /* 詩歌主題嘅小字 */
-        .song-theme {
-            display: block;
+        /* 詩歌主題嘅小字 (放喺左邊) */
+        .song-theme-inline {
             font-size: 11px;
             color: #888;
-            margin-top: 2px;
+            margin-right: 4px;
             font-weight: normal;
         }
 
@@ -164,8 +162,8 @@
             .header-col.right { padding-left: 0; }
             .two-columns { flex-direction: column; gap: 15px; }
             .column { width: 100%; }
-            .col-meditate { width: 95px; }
-            .col-song { width: 100px; }
+            .col-meditate { width: 85px; }
+            .col-song { width: 140px; }
             .header-col h2 { font-size: 16px; }
             .highlight { font-size: 20px; }
             .row { padding: 8px 5px; }
@@ -220,13 +218,13 @@
                 <div class="col-num">1.</div>
                 <div class="col-meditate">太十六13-18</div>
                 <div class="col-fastread">詩126 / 撒下13-14</div>
-                <div class="col-song">19冊7<span class="song-theme">(愛的永約)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(愛的永約)</span>19冊7</div>
             </div>
             <div class="row">
                 <div class="col-num">2.</div>
                 <div class="col-meditate">約十六12-14</div>
                 <div class="col-fastread">詩127 / 撒下15-16</div>
-                <div class="col-song">19冊17(1,2,5段)<span class="song-theme">(愛的永約)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(愛的永約)</span>19冊17(1,2,5段)</div>
             </div>
 
             <div class="group">(神的奧秘就是基督)</div>
@@ -234,55 +232,55 @@
                 <div class="col-num">3.</div>
                 <div class="col-meditate">西二1-3</div>
                 <div class="col-fastread">詩128 / 撒下17-18</div>
-                <div class="col-song">19冊55<span class="song-theme">(愛的永約)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(愛的永約)</span>19冊55</div>
             </div>
             <div class="row">
                 <div class="col-num">4.</div>
                 <div class="col-meditate">西二4-7</div>
                 <div class="col-fastread">詩129 / 撒下19-20</div>
-                <div class="col-song">19冊56(1-3段)<span class="song-theme">(愛的永約)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(愛的永約)</span>19冊56(1-3段)</div>
             </div>
             <div class="row">
                 <div class="col-num">5.</div>
                 <div class="col-meditate">西二8-12</div>
                 <div class="col-fastread">詩130 / 撒下21-22</div>
-                <div class="col-song">合訂1冊177<span class="song-theme">(新約的福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約的福)</span>合訂1冊177</div>
             </div>
             <div class="row">
                 <div class="col-num">6.</div>
                 <div class="col-meditate">林前二1-5</div>
                 <div class="col-fastread">詩131 / 撒下23-24</div>
-                <div class="col-song">12冊11<span class="song-theme">(從神生)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(從神生)</span>12冊11</div>
             </div>
             <div class="row">
                 <div class="col-num">7.</div>
                 <div class="col-meditate">林前二7-10</div>
                 <div class="col-fastread">詩132 / 王上1-2</div>
-                <div class="col-song">合訂2冊29<span class="song-theme">(從神生)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(從神生)</span>合訂2冊29</div>
             </div>
             <div class="row">
                 <div class="col-num">8.</div>
                 <div class="col-meditate">林前一18-21</div>
                 <div class="col-fastread">詩133 / 王上3-4</div>
-                <div class="col-song">合訂2冊19<span class="song-theme">(從神生)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(從神生)</span>合訂2冊19</div>
             </div>
             <div class="row">
                 <div class="col-num">9.</div>
                 <div class="col-meditate">林前一22-25</div>
                 <div class="col-fastread">詩134 / 王上5-6</div>
-                <div class="col-song">11冊91<span class="song-theme">(基督內住)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(基督內住)</span>11冊91</div>
             </div>
             <div class="row">
                 <div class="col-num">10.</div>
                 <div class="col-meditate">林後四3-6</div>
                 <div class="col-fastread">詩135 / 王上7-8</div>
-                <div class="col-song">11冊16(2,3段)<span class="song-theme">(基督內住)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(基督內住)</span>11冊16(2,3段)</div>
             </div>
             <div class="row">
                 <div class="col-num">11.</div>
                 <div class="col-meditate">西一24-27</div>
                 <div class="col-fastread">詩136 / 王上9-10</div>
-                <div class="col-song">13冊8<span class="song-theme">(基督內住)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(基督內住)</span>13冊8</div>
             </div>
 
             <div class="group">(基督的奧秘-教會)</div>
@@ -290,19 +288,19 @@
                 <div class="col-num">12.</div>
                 <div class="col-meditate">弗三2-6</div>
                 <div class="col-fastread">詩137 / 王上11-12</div>
-                <div class="col-song">12冊55<span class="song-theme">(基督內住)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(基督內住)</span>12冊55</div>
             </div>
             <div class="row">
                 <div class="col-num">13.</div>
                 <div class="col-meditate">弗三7-9</div>
                 <div class="col-fastread">詩138 / 王上13-14</div>
-                <div class="col-song">合訂1冊95<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂1冊95</div>
             </div>
             <div class="row">
                 <div class="col-num">14.</div>
                 <div class="col-meditate">弗三10-13</div>
                 <div class="col-fastread">詩139 / 王上15-16</div>
-                <div class="col-song">合訂1冊92<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂1冊92</div>
             </div>
 
             <div class="group">(與基督相連的奧秘)</div>
@@ -310,7 +308,7 @@
                 <div class="col-num">15.</div>
                 <div class="col-meditate">弗五25-27</div>
                 <div class="col-fastread">詩140 / 王上17-18</div>
-                <div class="col-song">合訂2冊54<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂2冊54</div>
             </div>
         </div>
 
@@ -329,43 +327,43 @@
                 <div class="col-num">16.</div>
                 <div class="col-meditate">弗五28-32</div>
                 <div class="col-fastread">詩141 / 王上19-20</div>
-                <div class="col-song">13冊34<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>13冊34</div>
             </div>
             <div class="row">
                 <div class="col-num">17.</div>
                 <div class="col-meditate">提前三15</div>
                 <div class="col-fastread">詩142 / 王上21-22</div>
-                <div class="col-song">合訂1冊91(1,3,6)<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂1冊91(1,3,6)</div>
             </div>
             <div class="row">
                 <div class="col-num">18.</div>
                 <div class="col-meditate">提前三16</div>
                 <div class="col-fastread">詩143 / 王下1-2</div>
-                <div class="col-song">合訂1冊35(1,3,5,7段)<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂1冊35(1,3,5,7段)</div>
             </div>
             <div class="row">
                 <div class="col-num">19.</div>
                 <div class="col-meditate">弗六18-20</div>
                 <div class="col-fastread">詩144 / 王下3-4</div>
-                <div class="col-song">合訂1冊35(2,4,6,8段)<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂1冊35(2,4,6,8段)</div>
             </div>
             <div class="row">
                 <div class="col-num">20.</div>
                 <div class="col-meditate">西四2-4</div>
                 <div class="col-fastread">詩145 / 王下5-6</div>
-                <div class="col-song">合訂1冊15<span class="song-theme">(與主聯合)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(與主聯合)</span>合訂1冊15</div>
             </div>
             <div class="row">
                 <div class="col-num">21.</div>
                 <div class="col-meditate">羅十六25-27</div>
                 <div class="col-fastread">詩146 / 王下7-8</div>
-                <div class="col-song">合訂1冊9<span class="song-theme">(新約二福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約二福)</span>合訂1冊9</div>
             </div>
             <div class="row">
                 <div class="col-num">22.</div>
                 <div class="col-meditate">林前十五50-54</div>
                 <div class="col-fastread">詩147 / 王下9-10</div>
-                <div class="col-song">16冊46(1,2段)<span class="song-theme">(新約二福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約二福)</span>16冊46(1,2段)</div>
             </div>
 
             <div class="group">(敬虔的奧秘-肉身顯現)</div>
@@ -373,31 +371,31 @@
                 <div class="col-num">23.</div>
                 <div class="col-meditate">太廿二41-46</div>
                 <div class="col-fastread">詩148 / 王下11-12</div>
-                <div class="col-song">合訂1冊317<span class="song-theme">(新約二福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約二福)</span>合訂1冊317</div>
             </div>
             <div class="row">
                 <div class="col-num">24.</div>
                 <div class="col-meditate">來二5-9</div>
                 <div class="col-fastread">詩149 / 王下13-14</div>
-                <div class="col-song">合訂1冊8<span class="song-theme">(新約二福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約二福)</span>合訂1冊8</div>
             </div>
             <div class="row">
                 <div class="col-num">25.</div>
                 <div class="col-meditate">來二14-15</div>
                 <div class="col-fastread">詩150 / 王下15-16</div>
-                <div class="col-song">13冊43(1,3,5段)<span class="song-theme">(新約三福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約三福)</span>13冊43(1,3,5段)</div>
             </div>
             <div class="row">
                 <div class="col-num">26.</div>
                 <div class="col-meditate">腓二5-8</div>
                 <div class="col-fastread">詩1 / 王下17-18</div>
-                <div class="col-song">合訂1冊154<span class="song-theme">(新約三福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約三福)</span>合訂1冊154</div>
             </div>
             <div class="row">
                 <div class="col-num">27.</div>
                 <div class="col-meditate">腓二9-11</div>
                 <div class="col-fastread">詩2 / 王下19-20</div>
-                <div class="col-song">19冊75(1,3,4段)<span class="song-theme">(新約三福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約三福)</span>19冊75(1,3,4段)</div>
             </div>
 
             <div class="group">(作奧秘事管家)</div>
@@ -405,19 +403,19 @@
                 <div class="col-num">28.</div>
                 <div class="col-meditate">腓三8-9</div>
                 <div class="col-fastread">詩3 / 王下21-22</div>
-                <div class="col-song">合訂1冊164<span class="song-theme">(新約四福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約四福)</span>合訂1冊164</div>
             </div>
             <div class="row">
                 <div class="col-num">29.</div>
                 <div class="col-meditate">腓三10-12</div>
                 <div class="col-fastread">詩4 / 王下23-24</div>
-                <div class="col-song">合訂2冊119(1,2段)<span class="song-theme">(新約四福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約四福)</span>合訂2冊119(1,2段)</div>
             </div>
             <div class="row">
                 <div class="col-num">30.</div>
                 <div class="col-meditate">西一9-11</div>
                 <div class="col-fastread">詩5 / 王下25</div>
-                <div class="col-song">21冊70<span class="song-theme">(新約四福)</span></div>
+                <div class="col-song"><span class="song-theme-inline">(新約四福)</span>21冊70</div>
             </div>
         </div>
 
