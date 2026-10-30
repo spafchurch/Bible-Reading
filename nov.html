@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>11月親近主Team讀經表-神的奧秘</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 500px;
+        }
+        h1 {
+            font-size: 20px;
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        .date-picker {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        .progress-container {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #27ae60;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        .progress-text {
+            text-align: right;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        .daily-card {
+            background-color: #f9fbfd;
+            border: 1px solid #e1e8ed;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .day-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2980b9;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 10px;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .theme-tag {
+            font-size: 13px;
+            background-color: #e67e22;
+            color: #fff;
+            padding: 3px 10px;
+            border-radius: 20px;
+            margin-left: 10px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(230, 126, 34, 0.3);
+        }
+        
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            background-color: #fff;
+            border: 1px solid #eee;
+            transition: background-color 0.2s;
+        }
+        .check-item.completed {
+            background-color: #f0f0f0;
+            opacity: 0.7;
+        }
+        .check-item.completed .item-text {
+            text-decoration: line-through;
+            color: #999;
+        }
+        
+        .check-item input[type="checkbox"] {
+            width: 22px;
+            height: 22px;
+            margin-right: 12px;
+            margin-top: 2px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .item-content {
+            flex-grow: 1;
+        }
+        .item-text {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 5px;
+        }
+        .item-label {
+            font-size: 12px;
+            color: #888;
+            font-weight: bold;
+            margin-bottom: 2px;
+        }
+        
+        .gateway-btn {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #e8f8f5;
+            color: #16a085;
+            border: 1px solid #16a085;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .gateway-btn:active {
+            background-color: #16a085;
+            color: #fff;
+        }
+
+        .song-link {
+            display: inline-block;
+            padding: 6px 10px;
+            background-color: #fdf2e9;
+            color: #d35400;
+            border: 1px solid #e67e22;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .song-link:active {
+            background-color: #e67e22;
+            color: #fff;
+        }
+
+        .song-text {
+            color: #c0392b;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>享受神的奧秘</h1>
+    <div class="subtitle">早上親主team讀經表 (11/2026)</div>
+    
+    <input type="date" id="datePicker" class="date-picker">
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+    <div class="progress-text" id="progressText">本月進度：0% (0/120)</div>
+
+    <div class="daily-card" id="dailyCard">
+        <div class="day-title" id="dayTitle">第 1 日</div>
+        
+        <div id="versesContainer">
+            <!-- 動態加載三段經文 -->
+        </div>
+        
+        <div id="songContainer">
+            <!-- 動態加載詩歌 -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // 11月數據，已將經文拆分為三段
+    const schedule = {
+        1: { 
+            verses: ["太十六13-18", "詩126", "撒下13-14"], 
+            song: "19冊7", 
+            group: "進入真理", 
+            url: "https://www.biblegateway.com/passage/?search=馬太福音+16:13-18,詩篇+126,撒母耳記下+13-14&version=CUV" 
+        },
+        2: { 
+            verses: ["約十六12-14", "詩127", "撒下15-16"], 
+            song: "19冊17(1,2,5段)", 
+            group: "進入真理", 
+            url: "https://www.biblegateway.com/passage/?search=約翰福音+16:12-14,詩篇+127,撒母耳記下+15-16&version=CUV" 
+        },
+        3: { 
+            verses: ["西二1-3", "詩128", "撒下17-18"], 
+            song: "19冊55", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:1-3,詩篇+128,撒母耳記下+17-18&version=CUV" 
+        },
+        4: { 
+            verses: ["西二4-7", "詩129", "撒下19-20"], 
+            song: "19冊56(1-3段)", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:4-7,詩篇+129,撒母耳記下+19-20&version=CUV" 
+        },
+        5: { 
+            verses: ["西二8-12", "詩130", "撒下21-22"], 
+            song: "合訂1冊177", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:8-12,詩篇+130,撒母耳記下+21-22&version=CUV" 
+        },
+        6: { 
+            verses: ["林前二1-5", "詩131", "撒下23-24"], 
+            song: "12冊11", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:1-5,詩篇+131,撒母耳記下+23-24&version=CUV" 
+        },
+        7: { 
+            verses: ["林前二7-10", "詩132", "王上1-2"], 
+            song: "合訂2冊29", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:7-10,詩篇+132,列王紀上+1-2&version=CUV" 
+        },
+        8: { 
+            verses: ["林前一18-21", "詩133", "王上3-4"], 
+            song: "合訂2冊19", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:18-21,詩篇+133,列王紀上+3-4&version=CUV" 
+        },
+        9: { 
+            verses: ["林前一22-25", "詩134", "王上5-6"], 
+            song: "11冊91", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:22-25,詩篇+134,列王紀上+5-6&version=CUV" 
+        },
+        10: { 
+            verses: ["林後四3-6", "詩135", "王上7-8"], 
+            song: "11冊16(2,3段)", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=哥林多後書+4:3-6,詩篇+135,列王紀上+7-8&version=CUV" 
+        },
+        11: { 
+            verses: ["西一24-27", "詩136", "王上9-10"], 
+            song: "13冊8", 
+            group: "神的奧秘就是基督", 
+            url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:24-27,詩篇+136,列王紀上+9-10&version=CUV" 
+        },
+        12: { 
+            verses: ["弗三2-6", "詩137", "王上11-12"], 
+            song: "12冊55", 
+            group: "基督的奧秘-教會", 
+            url: "https://www.biblegateway.com/passage/?search=以弗所書+3:2-6,詩篇+137,列王紀上+11-12&version=CUV" 
+        },
+        13: { 
+            verses: ["弗三7-9", "詩138", "王上13-14"], 
+            song: "合訂1冊95", 
+            group: "基督的奧秘-教會", 
+            url: "https://www.biblegateway.com/passage/?search=以弗所書+3:7-9,詩篇+138,列王紀上+13-14&version=CUV" 
+        },
+        14: { 
+            verses: ["弗三10-13", "詩139", "王上15-16"], 
+            song: "合訂1冊92", 
+            group: "基督的奧秘-教會", 
+            url: "https://www.biblegateway.com/passage/?search=以弗所書+3:10-13,詩篇+139,列王紀上+15-16&version=CUV" 
+        },
+        15: { 
+            verses: ["弗五25-27", "詩140", "王上17-18"], 
+            song: "合訂2冊54", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=以弗所書+5:25-27,詩篇+140,列王紀上+17-18&version=CUV" 
+        },
+        16: { 
+            verses: ["弗五28-32", "詩141", "王上19-20"], 
+            song: "13冊34", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=以弗所書+5:28-32,詩篇+141,列王紀上+19-20&version=CUV" 
+        },
+        17: { 
+            verses: ["提前三15", "詩142", "王上21-22"], 
+            song: "合訂1冊91(1,3,6)", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:15,詩篇+142,列王紀上+21-22&version=CUV" 
+        },
+        18: { 
+            verses: ["提前三16", "詩143", "王下1-2"], 
+            song: "合訂1冊35(1,3,5,7段)", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:16,詩篇+143,列王紀下+1-2&version=CUV" 
+        },
+        19: { 
+            verses: ["弗六18-20", "詩144", "王下3-4"], 
+            song: "合訂1冊35(2,4,6,8段)", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=以弗所書+6:18-20,詩篇+144,列王紀下+3-4&version=CUV" 
+        },
+        20: { 
+            verses: ["西四2-4", "詩145", "王下5-6"], 
+            song: "合訂1冊15", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=歌羅西書+4:2-4,詩篇+145,列王紀下+5-6&version=CUV" 
+        },
+        21: { 
+            verses: ["羅十六25-27", "詩146", "王下7-8"], 
+            song: "合訂1冊9", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=羅馬書+16:25-27,詩篇+146,列王紀下+7-8&version=CUV" 
+        },
+        22: { 
+            verses: ["林前十五50-54", "詩147", "王下9-10"], 
+            song: "16冊46(1,2段)", 
+            group: "與基督相連的奧秘", 
+            url: "https://www.biblegateway.com/passage/?search=哥林多前書+15:50-54,詩篇+147,列王紀下+9-10&version=CUV" 
+        },
+        23: { 
+            verses: ["太廿二41-46", "詩148", "王下11-12"], 
+            song: "合訂1冊317", 
+            group: "敬虔的奧秘-肉身顯現", 
+            url: "https://www.biblegateway.com/passage/?search=馬太福音+22:41-46,詩篇+148,列王紀下+11-12&version=CUV" 
+        },
+        24: { 
+            verses: ["來二5-9", "詩149", "王下13-14"], 
+            song: "合訂1冊8", 
+            group: "敬虔的奧秘-肉身顯現", 
+            url: "https://www.biblegateway.com/passage/?search=希伯來書+2:5-9,詩篇+149,列王紀下+13-14&version=CUV" 
+        },
+        25: { 
+            verses: ["來二14-15", "詩150", "王下15-16"], 
+            song: "13冊43(1,3,5段)", 
+            group: "敬虔的奧秘-肉身顯現", 
+            url: "https://www.biblegateway.com/passage/?search=希伯來書+2:14-15,詩篇+150,列王紀下+15-16&version=CUV" 
+        },
+        26: { 
+            verses: ["腓二5-8", "詩1", "王下17-18"], 
+            song: "合訂1冊154", 
+            group: "敬虔的奧秘-肉身顯現", 
+            url: "https://www.biblegateway.com/passage/?search=腓立比書+2:5-8,詩篇+1,列王紀下+17-18&version=CUV" 
+        },
+        27: { 
+            verses: ["腓二9-11", "詩2", "王下19-20"], 
+            song: "19冊75(1,3,4段)", 
+            group: "敬虔的奧秘-肉身顯現", 
+            url: "https://www.biblegateway.com/passage/?search=腓立比書+2:9-11,詩篇+2,列王紀下+19-20&version=CUV" 
+        },
+        28: { 
+            verses: ["腓三8-9", "詩3", "王下21-22"], 
+            song: "合訂1冊164", 
+            group: "作奧秘事管家", 
+            url: "https://www.biblegateway.com/passage/?search=腓立比書+3:8-9,詩篇+3,列王紀下+21-22&version=CUV" 
+        },
+        29: { 
+            verses: ["腓三10-12", "詩4", "王下23-24"], 
+            song: "合訂2冊119(1,2段)", 
+            group: "作奧秘事管家", 
+            url: "https://www.biblegateway.com/passage/?search=腓立比書+3:10-12,詩篇+4,列王紀下+23-24&version=CUV" 
+        },
+        30: { 
+            verses: ["西一9-11", "詩5", "王下25"], 
+            song: "21冊70", 
+            group: "作奧秘事管家", 
+            url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:9-11,詩篇+5,列王紀下+25&version=CUV" 
+        }
+    };
+
+    const datePicker = document.getElementById('datePicker');
+    const dayTitle = document.getElementById('dayTitle');
+    const versesContainer = document.getElementById('versesContainer');
+    const songContainer = document.getElementById('songContainer');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+
+    // 自動獲取當天日期
+    const today = new Date();
+    const currentYear = today.getFullYear();
+    const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
+    const currentDay = String(today.getDate()).padStart(2, '0');
+    datePicker.value = `${currentYear}-${currentMonth}-${currentDay}`;
+
+    function getStorageKey(dateStr, type) {
+        return 'bible_record_' + dateStr + '_' + type;
+    }
+
+    function updateProgress(year, month) {
+        let completedCount = 0;
+        const daysInMonth = new Date(year, month, 0).getDate();
+        const totalDays = Math.min(daysInMonth, 30); // 11月只有30天
+        const totalItems = totalDays * 4; // 每日4個項目 (3段經文 + 1首詩歌)
+
+        for (let i = 1; i <= totalDays; i++) {
+            const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+            // 檢查3段經文
+            for (let j = 1; j <= 3; j++) {
+                if (localStorage.getItem(getStorageKey(dateStr, 'verse' + j)) === 'true') {
+                    completedCount++;
+                }
+            }
+            // 檢查詩歌
+            if (localStorage.getItem(getStorageKey(dateStr, 'song')) === 'true') {
+                completedCount++;
+            }
+        }
+
+        const percentage = Math.round((completedCount / totalItems) * 100);
+        progressBar.style.width = percentage + '%';
+        progressText.innerText = `本月進度：${percentage}% (${completedCount}/${totalItems})`;
+    }
+
+    function createCheckItem(dateStr, type, label, text, extraHtml = '') {
+        const isChecked = localStorage.getItem(getStorageKey(dateStr, type)) === 'true';
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'check-item' + (isChecked ? ' completed' : '');
+        
+        itemDiv.innerHTML = `
+            <input type="checkbox" id="chk_${type}" ${isChecked ? 'checked' : ''}>
+            <div class="item-content">
+                <div class="item-label">${label}</div>
+                <div class="item-text">${text}</div>
+                ${extraHtml}
+            </div>
+        `;
+        
+        const checkbox = itemDiv.querySelector('input');
+        checkbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                localStorage.setItem(getStorageKey(dateStr, type), 'true');
+                itemDiv.classList.add('completed');
+            } else {
+                localStorage.removeItem(getStorageKey(dateStr, type));
+                itemDiv.classList.remove('completed');
+            }
+            const dateObj = new Date(dateStr);
+            updateProgress(dateObj.getFullYear(), dateObj.getMonth() + 1);
+        });
+        
+        return itemDiv;
+    }
+
+    function loadDayData(dateStr) {
+        const dateObj = new Date(dateStr);
+        const day = dateObj.getDate();
+        const year = dateObj.getFullYear();
+        const month = dateObj.getMonth() + 1;
+
+        if (day > 30) return; // 11月最多30日
+
+        const data = schedule[day];
+        if (data) {
+            // 設定標題
+            const themeHtml = data.group ? `<span class="theme-tag">${data.group}</span>` : '';
+            dayTitle.innerHTML = `第 ${day} 日 ${themeHtml}`;
+            
+            // 清空容器
+            versesContainer.innerHTML = '';
+            songContainer.innerHTML = '';
+
+            // 1. 加入 Gateway Bible 總按鈕
+            const gatewayBtn = document.createElement('a');
+            gatewayBtn.href = data.url;
+            gatewayBtn.target = '_blank';
+            gatewayBtn.className = 'gateway-btn';
+            gatewayBtn.style.width = '100%';
+            gatewayBtn.style.textAlign = 'center';
+            gatewayBtn.style.marginBottom = '15px';
+            gatewayBtn.innerHTML = '📖 一次過打開今日所有經文 (Gateway Bible)';
+            versesContainer.appendChild(gatewayBtn);
+
+            // 2. 加入三段經文打勾
+            const verseLabels = ["第一段經文", "第二段經文", "第三段經文"];
+            data.verses.forEach((verse, index) => {
+                const type = 'verse' + (index + 1);
+                const item = createCheckItem(dateStr, type, verseLabels[index], verse);
+                versesContainer.appendChild(item);
+            });
+
+            // 3. 加入詩歌打勾
+            const songSearchUrl = `https://churchofgod.org.hk/hymns/?s=${encodeURIComponent(data.song)}`;
+            const songExtra = `<a href="${songSearchUrl}" target="_blank" class="song-link">🎵 前往教會網站搜尋此詩歌</a>`;
+            const songItem = createCheckItem(dateStr, 'song', '第四項：詩歌', `<span class="song-text">${data.song}</span>`, songExtra);
+            songContainer.appendChild(songItem);
+        }
+
+        updateProgress(year, month);
+    }
+
+    datePicker.addEventListener('change', (e) => {
+        loadDayData(e.target.value);
+    });
+
+    // 首次載入
+    loadDayData(datePicker.value);
+
+</script>
+</body>
+</html>
