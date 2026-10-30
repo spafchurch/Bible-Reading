@@ -74,7 +74,7 @@
         /* 左右兩大欄佈局 */
         .two-columns {
             display: flex;
-            gap: 20px; /* 稍微收窄間距以容納 5 欄 */
+            gap: 20px;
             margin-bottom: 20px;
         }
         .column {
@@ -126,9 +126,9 @@
             padding-right: 10px;
         }
 
-        /* 第四欄：詩歌主題 (專屬 Column，拍齊) */
+        /* 第四欄：詩歌主題 */
         .col-song-theme {
-            width: 75px;
+            width: 85px; /* 稍微加闊以容納四隻字 */
             flex-shrink: 0;
             color: #888;
             font-size: 12px;
@@ -167,7 +167,7 @@
             .two-columns { flex-direction: column; gap: 15px; }
             .column { width: 100%; }
             .col-meditate { width: 90px; }
-            .col-song-theme { width: 70px; }
+            .col-song-theme { width: 75px; }
             .col-song { width: 90px; }
             .header-col h2 { font-size: 16px; }
             .highlight { font-size: 20px; }
@@ -215,7 +215,7 @@
                 <div class="col-num">日</div>
                 <div class="col-meditate">親近主默想</div>
                 <div class="col-fastread">快讀進度</div>
-                <div class="col-song-theme">主題</div>
+                <div class="col-song-theme">詩歌主題</div>
                 <div class="col-song">詩歌</div>
             </div>
 
@@ -339,7 +339,7 @@
                 <div class="col-num">日</div>
                 <div class="col-meditate">親近主默想</div>
                 <div class="col-fastread">快讀進度</div>
-                <div class="col-song-theme">主題</div>
+                <div class="col-song-theme">詩歌主題</div>
                 <div class="col-song">詩歌</div>
             </div>
 
