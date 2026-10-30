@@ -15,7 +15,7 @@
             justify-content: center;
         }
         .container {
-            background-color: #fbf9f4; /* 米黃色背景，跟足你張相 */
+            background-color: #fbf9f4;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             padding: 20px;
@@ -97,7 +97,6 @@
             letter-spacing: 2px;
         }
 
-        /* 打勾項目行 */
         .check-item {
             display: flex;
             align-items: center;
@@ -108,7 +107,6 @@
             border-bottom: none;
         }
         
-        /* 左邊標籤 (默想/詩篇/快讀/詩歌) */
         .item-label {
             width: 60px;
             height: 30px;
@@ -131,7 +129,6 @@
             border: 1px solid #333;
         }
         
-        /* 右邊文字 (可點擊) */
         .item-text {
             font-size: 18px;
             color: #333;
@@ -373,12 +370,6 @@
     const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
 
-    const today = new Date();
-    const currentYear = today.getFullYear();
-    const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
-    const currentDay = String(today.getDate()).padStart(2, '0');
-    datePicker.value = `${currentYear}-${currentMonth}-${currentDay}`;
-
     function getStorageKey(dateStr, type) {
         return 'bible_record_' + dateStr + '_' + type;
     }
@@ -404,91 +395,4 @@
     }
 
     function createCheckItem(dateStr, type, label, text, url) {
-        const isChecked = localStorage.getItem(getStorageKey(dateStr, type)) === 'true';
-        
-        const itemDiv = document.createElement('div');
-        itemDiv.className = 'check-item' + (isChecked ? ' completed' : '');
-        
-        // 建立 Checkbox
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.checked = isChecked;
-        checkbox.addEventListener('change', (e) => {
-            if (e.target.checked) {
-                localStorage.setItem(getStorageKey(dateStr, type), 'true');
-                itemDiv.classList.add('completed');
-            } else {
-                localStorage.removeItem(getStorageKey(dateStr, type));
-                itemDiv.classList.remove('completed');
-            }
-            const dateObj = new Date(dateStr);
-            updateProgress(dateObj.getFullYear(), dateObj.getMonth() + 1);
-        });
-
-        // 建立標籤
-        const labelDiv = document.createElement('div');
-        labelDiv.className = 'item-label';
-        labelDiv.innerText = label;
-
-        // 建立可點擊嘅文字連結
-        const link = document.createElement('a');
-        link.href = url;
-        link.target = '_blank';
-        link.className = 'item-text';
-        link.innerText = text;
-
-        itemDiv.appendChild(labelDiv);
-        itemDiv.appendChild(checkbox);
-        itemDiv.appendChild(link);
-
-        return itemDiv;
-    }
-
-    function loadDayData(dateStr) {
-        const dateObj = new Date(dateStr);
-        const day = dateObj.getDate();
-        const year = dateObj.getFullYear();
-        const month = dateObj.getMonth() + 1;
-        const weekDayNames = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
-        const weekDay = weekDayNames[dateObj.getDay()];
-        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-
-        if (day > 30) return;
-
-        const data = schedule[day];
-        if (data) {
-            // 設定大標題
-            dayTitle.innerHTML = `
-                <div style="display:flex; align-items:baseline; width:100%;">
-                    <span class="day-num">${day}</span>
-                    <span class="day-week">${weekDay}</span>
-                    <span class="day-month" style="margin-left:auto;">${monthNames[month-1]}</span>
-                </div>
-            `;
-            
-            itemsContainer.innerHTML = '';
-
-            // 默想
-            itemsContainer.appendChild(createCheckItem(dateStr, 'meditate', '默想', data.meditate.text, data.meditate.url));
-            // 詩篇
-            itemsContainer.appendChild(createCheckItem(dateStr, 'psalm', '詩篇', data.psalm.text, data.psalm.url));
-            // 快讀
-            itemsContainer.appendChild(createCheckItem(dateStr, 'fastread', '快讀', data.fastread.text, data.fastread.url));
-            
-            // 詩歌 (改用 Google 站內搜尋，確保搵到)
-            const songSearchUrl = `https://www.google.com/search?q=site:churchofgod.org.hk+"${encodeURIComponent(data.song)}"`;
-            itemsContainer.appendChild(createCheckItem(dateStr, 'song', '詩歌', data.song, songSearchUrl));
-        }
-
-        updateProgress(year, month);
-    }
-
-    datePicker.addEventListener('change', (e) => {
-        loadDayData(e.target.value);
-    });
-
-    loadDayData(datePicker.value);
-
-</script>
-</body>
-</html>
+        const isChecked = localStorage.getItem(getStorageKey(dateStr, type)) =
