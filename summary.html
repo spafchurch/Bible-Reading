@@ -15,7 +15,7 @@
         }
         .a4-page {
             background-color: #fff;
-            padding: 20px 30px;
+            padding: 15px 30px 20px 30px; /* 減少頂部留白 */
             width: 100%;
             max-width: 1100px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -26,19 +26,18 @@
         
         /* 頂部左右兩欄 Header */
         .header-container {
-            margin-bottom: 20px;
+            margin-bottom: 15px; /* 減少與下方表格的距離 */
         }
         .header-columns {
             display: flex;
             justify-content: space-between;
             gap: 30px;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
         .header-col {
             flex: 1;
-            text-align: center;
+            text-align: left; /* 全部靠左對齊 */
         }
-        /* 已刪除中間虛線 */
         .header-col.left {
             padding-right: 10px;
         }
@@ -49,23 +48,26 @@
             margin: 0 0 8px 0;
             font-size: 18px;
             color: #2c3e50;
+            text-align: center; /* 標題保持居中，保持大體感 */
         }
         .header-col p {
             margin: 3px 0;
             font-size: 13px;
             color: #333;
+            text-align: left; /* 內容靠左 */
         }
         
-        /* 中間置中的月份標籤 (已放大) */
+        /* 中間置中的月份標籤 (已升上並放大) */
         .header-date {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 5px;
+            margin-bottom: 5px;
         }
         .highlight {
             background-color: #ffff00;
-            padding: 5px 20px;
+            padding: 4px 20px;
             font-weight: bold;
-            font-size: 24px; /* 放大月份 */
+            font-size: 22px;
             display: inline-block;
         }
 
@@ -73,7 +75,7 @@
         .two-columns {
             display: flex;
             gap: 30px;
-            margin-bottom: 20px;
+            margin-bottom: 0; /* 底部無需額外留白 */
         }
         .column {
             flex: 1;
@@ -167,17 +169,15 @@
     <!-- 頂部雙欄 Header -->
     <div class="header-container">
         <div class="header-columns">
-            <!-- 左邊：讀經表資訊 (已合併並靠左) -->
+            <!-- 左邊：讀經表資訊 (全部靠左) -->
             <div class="header-col left">
                 <h2>早上親主TEAM讀經表-神的奧秘</h2>
                 <p>快讀:詩篇126-5、撒母耳記下、列王紀上、下</p>
                 <p>此讀經表只作參考，各親近主Team或個人可因應需要作出調整</p>
-                <p style="text-align: left; padding: 0 10px;">
-                    (1/建議B/S聖經時找住一個重點主題，集中去默想及隨從聖靈引導發展默想，並向主作出回應敬拜)，另建議可抽其他時間快讀︰詩篇126-5、撒母耳記下、列王紀上、下及至少一節雅歌
-                </p>
+                <p>(1/建議B/S聖經時找住一個重點主題，集中去默想及隨從聖靈引導發展默想，並向主作出回應敬拜)，另建議可抽其他時間快讀︰詩篇126-5、撒母耳記下、列王紀上、下及至少一節雅歌</p>
             </div>
             
-            <!-- 右邊：唱詩表資訊 -->
+            <!-- 右邊：唱詩表資訊 (全部靠左) -->
             <div class="header-col right">
                 <h2>早上親主TEAM唱詩表︰無限者與我愛的永約</h2>
                 <p>此唱詩表只作參考，各親近主Team可因應需要作出調整</p>
@@ -185,7 +185,7 @@
             </div>
         </div>
         
-        <!-- 底部置中月份 -->
+        <!-- 底部置中月份 (已升上) -->
         <div class="header-date">
             <div class="highlight">(11/2026)</div>
         </div>
