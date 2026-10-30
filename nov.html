@@ -31,7 +31,7 @@
     <div class="subtitle">早上親主team讀經表 (11/2026)</div>
     <input type="date" id="datePicker" class="date-picker">
     <div class="progress-container"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="progress-text" id="progressText">本月進度：0% (0/120)</div>
+    <div class="progress-text" id="progressText">本月進度：0% (0/90)</div>
     <div class="daily-card">
         <div class="day-title" id="dayTitle"></div>
         <div id="itemsContainer"></div>
@@ -39,36 +39,36 @@
 </div>
 <script>
     var schedule = {
-        1: { m: "太十六 13-18", p: "詩 126", f: "撒下 13-14", s: "19冊7" },
-        2: { m: "約十六 12-14", p: "詩 127", f: "撒下 15-16", s: "19冊17(1,2,5段)" },
-        3: { m: "西二 1-3", p: "詩 128", f: "撒下 17-18", s: "19冊55" },
-        4: { m: "西二 4-7", p: "詩 129", f: "撒下 19-20", s: "19冊56(1-3段)" },
-        5: { m: "西二 8-12", p: "詩 130", f: "撒下 21-22", s: "合訂1冊177" },
-        6: { m: "林前二 1-5", p: "詩 131", f: "撒下 23-24", s: "12冊11" },
-        7: { m: "林前二 7-10", p: "詩 132", f: "王上 1-2", s: "合訂2冊29" },
-        8: { m: "林前一 18-21", p: "詩 133", f: "王上 3-4", s: "合訂2冊19" },
-        9: { m: "林前一 22-25", p: "詩 134", f: "王上 5-6", s: "11冊91" },
-        10: { m: "林後四 3-6", p: "詩 135", f: "王上 7-8", s: "11冊16(2,3段)" },
-        11: { m: "西一 24-27", p: "詩 136", f: "王上 9-10", s: "13冊8" },
-        12: { m: "弗三 2-6", p: "詩 137", f: "王上 11-12", s: "12冊55" },
-        13: { m: "弗三 7-9", p: "詩 138", f: "王上 13-14", s: "合訂1冊95" },
-        14: { m: "弗三 10-13", p: "詩 139", f: "王上 15-16", s: "合訂1冊92" },
-        15: { m: "弗五 25-27", p: "詩 140", f: "王上 17-18", s: "合訂2冊54" },
-        16: { m: "弗五 28-32", p: "詩 141", f: "王上 19-20", s: "13冊34" },
-        17: { m: "提前三 15", p: "詩 142", f: "王上 21-22", s: "合訂1冊91(1,3,6)" },
-        18: { m: "提前三 16", p: "詩 143", f: "王下 1-2", s: "合訂1冊35(1,3,5,7段)" },
-        19: { m: "弗六 18-20", p: "詩 144", f: "王下 3-4", s: "合訂1冊35(2,4,6,8段)" },
-        20: { m: "西四 2-4", p: "詩 145", f: "王下 5-6", s: "合訂1冊15" },
-        21: { m: "羅十六 25-27", p: "詩 146", f: "王下 7-8", s: "合訂1冊9" },
-        22: { m: "林前十五 50-54", p: "詩 147", f: "王下 9-10", s: "16冊46(1,2段)" },
-        23: { m: "太廿二 41-46", p: "詩 148", f: "王下 11-12", s: "合訂1冊317" },
-        24: { m: "來二 5-9", p: "詩 149", f: "王下 13-14", s: "合訂1冊8" },
-        25: { m: "來二 14-15", p: "詩 150", f: "王下 15-16", s: "13冊43(1,3,5段)" },
-        26: { m: "腓二 5-8", p: "詩 1", f: "王下 17-18", s: "合訂1冊154" },
-        27: { m: "腓二 9-11", p: "詩 2", f: "王下 19-20", s: "19冊75(1,3,4段)" },
-        28: { m: "腓三 8-9", p: "詩 3", f: "王下 21-22", s: "合訂1冊164" },
-        29: { m: "腓三 10-12", p: "詩 4", f: "王下 23-24", s: "合訂2冊119(1,2段)" },
-        30: { m: "西一 9-11", p: "詩 5", f: "王下 25", s: "21冊70" }
+        1: { m: "太十六 13-18", p: "詩 126", f: "撒下 13-14" },
+        2: { m: "約十六 12-14", p: "詩 127", f: "撒下 15-16" },
+        3: { m: "西二 1-3", p: "詩 128", f: "撒下 17-18" },
+        4: { m: "西二 4-7", p: "詩 129", f: "撒下 19-20" },
+        5: { m: "西二 8-12", p: "詩 130", f: "撒下 21-22" },
+        6: { m: "林前二 1-5", p: "詩 131", f: "撒下 23-24" },
+        7: { m: "林前二 7-10", p: "詩 132", f: "王上 1-2" },
+        8: { m: "林前一 18-21", p: "詩 133", f: "王上 3-4" },
+        9: { m: "林前一 22-25", p: "詩 134", f: "王上 5-6" },
+        10: { m: "林後四 3-6", p: "詩 135", f: "王上 7-8" },
+        11: { m: "西一 24-27", p: "詩 136", f: "王上 9-10" },
+        12: { m: "弗三 2-6", p: "詩 137", f: "王上 11-12" },
+        13: { m: "弗三 7-9", p: "詩 138", f: "王上 13-14" },
+        14: { m: "弗三 10-13", p: "詩 139", f: "王上 15-16" },
+        15: { m: "弗五 25-27", p: "詩 140", f: "王上 17-18" },
+        16: { m: "弗五 28-32", p: "詩 141", f: "王上 19-20" },
+        17: { m: "提前三 15", p: "詩 142", f: "王上 21-22" },
+        18: { m: "提前三 16", p: "詩 143", f: "王下 1-2" },
+        19: { m: "弗六 18-20", p: "詩 144", f: "王下 3-4" },
+        20: { m: "西四 2-4", p: "詩 145", f: "王下 5-6" },
+        21: { m: "羅十六 25-27", p: "詩 146", f: "王下 7-8" },
+        22: { m: "林前十五 50-54", p: "詩 147", f: "王下 9-10" },
+        23: { m: "太廿二 41-46", p: "詩 148", f: "王下 11-12" },
+        24: { m: "來二 5-9", p: "詩 149", f: "王下 13-14" },
+        25: { m: "來二 14-15", p: "詩 150", f: "王下 15-16" },
+        26: { m: "腓二 5-8", p: "詩 1", f: "王下 17-18" },
+        27: { m: "腓二 9-11", p: "詩 2", f: "王下 19-20" },
+        28: { m: "腓三 8-9", p: "詩 3", f: "王下 21-22" },
+        29: { m: "腓三 10-12", p: "詩 4", f: "王下 23-24" },
+        30: { m: "西一 9-11", p: "詩 5", f: "王下 25" }
     };
 
     var bookMap = { "太": "馬太福音", "約": "約翰福音", "西": "歌羅西書", "林前": "哥林多前書", "林後": "哥林多後書", "弗": "以弗所書", "提前": "提摩太前書", "來": "希伯來書", "腓": "腓立比書", "羅": "羅馬書", "詩": "詩篇", "撒下": "撒母耳記下", "王上": "列王紀上", "王下": "列王紀下" };
@@ -81,24 +81,24 @@
         return "https://www.biblegateway.com/passage/?search=" + encodeURIComponent(search) + "&version=CUV&interface=print";
     }
 
-    function getKey(dateStr, type) { return 'bible_v2_' + dateStr + '_' + type; }
+    function getKey(dateStr, type) { return 'bible_v3_' + dateStr + '_' + type; }
 
     function updateProgress(year, month) {
-        var total = 120, done = 0;
+        var total = 90, done = 0; // 更新為 30日 x 3項 = 90
         for(var i=1; i<=30; i++) {
             var d = i < 10 ? '0'+i : i;
             var m = month < 10 ? '0'+month : month;
             var str = year+'-'+m+'-'+d;
-            ['m','p','f','s'].forEach(function(t){
+            ['m','p','f'].forEach(function(t){
                 if(localStorage.getItem(getKey(str, t)) === 'true') done++;
             });
         }
         var pct = Math.round((done/total)*100);
         document.getElementById('progressBar').style.width = pct + '%';
-        document.getElementById('progressText').innerText = '本月進度：' + pct + '% (' + done + '/120)';
+        document.getElementById('progressText').innerText = '本月進度：' + pct + '% (' + done + '/90)';
     }
 
-    function createItem(dateStr, type, label, text, isSong) {
+    function createItem(dateStr, type, label, text) {
         var isChecked = localStorage.getItem(getKey(dateStr, type)) === 'true';
         var div = document.createElement('div');
         div.className = 'check-item' + (isChecked ? ' completed' : '');
@@ -126,11 +126,7 @@
         a.className = 'item-text';
         a.target = '_blank';
         a.innerText = text;
-        if(isSong) {
-            a.href = "https://www.google.com/search?q=site:churchofgod.org.hk+\"" + encodeURIComponent(text) + "\"";
-        } else {
-            a.href = getUrl(text);
-        }
+        a.href = getUrl(text);
 
         div.appendChild(lbl);
         div.appendChild(cb);
@@ -157,22 +153,21 @@
         if(data) {
             var box = document.getElementById('itemsContainer');
             box.innerHTML = '';
-            box.appendChild(createItem(dateStr, 'm', '默想', data.m, false));
-            box.appendChild(createItem(dateStr, 'p', '詩篇', data.p, false));
-            box.appendChild(createItem(dateStr, 'f', '快讀', data.f, false));
-            box.appendChild(createItem(dateStr, 's', '詩歌', data.s, true));
+            // 只加載三格：默想、詩篇、快讀
+            box.appendChild(createItem(dateStr, 'm', '默想', data.m));
+            box.appendChild(createItem(dateStr, 'p', '詩篇', data.p));
+            box.appendChild(createItem(dateStr, 'f', '快讀', data.f));
         }
         updateProgress(y, m);
     }
 
-    // 初始化（加入防呆機制）
     window.onload = function() {
         var today = new Date();
         var y = today.getFullYear();
-        var m = today.getMonth() + 1; // 1-12
+        var m = today.getMonth() + 1;
         var d = today.getDate();
 
-        // 【核心修正】如果而家唔係 11 月，就強制預設顯示 11月1日
+        // 防呆機制：如果未到11月，強制顯示11月1日
         if (m !== 11) {
             m = 11;
             d = 1;
