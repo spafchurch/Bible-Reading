@@ -18,10 +18,12 @@
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            padding: 30px;
+            padding: 20px 30px;
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px; /* 加闊以容納兩欄 */
         }
+        
+        /* 頂部標題資訊 */
         .header {
             text-align: center;
             margin-bottom: 20px;
@@ -47,89 +49,67 @@
             margin: 10px 0;
             font-size: 16px;
         }
-        
-        /* 表格排版設計 */
-        .table-section {
-            margin-bottom: 40px;
+
+        /* 左右兩欄佈局 */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
         }
-        .section-title {
-            font-size: 18px;
-            color: #2980b9;
-            border-bottom: 2px solid #2980b9;
-            padding-bottom: 5px;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-        th, td {
-            padding: 8px 10px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-            color: #555;
-        }
-        
-        /* 處理分組標題 (例如：進入真理) */
+
+        /* 分組標題 */
         .group-title {
             font-weight: bold;
             color: #d35400;
             background-color: #fdf2e9;
-            padding: 6px 10px;
+            padding: 5px 10px;
             border-left: 4px solid #e67e22;
             margin-top: 15px;
             margin-bottom: 5px;
             font-size: 14px;
         }
 
-        /* 兩欄佈局 (左邊1-15, 右邊16-30) */
-        .two-columns {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
+        /* 每日行樣式 */
+        .daily-row {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            padding: 8px 0;
+            font-size: 14px;
+            align-items: flex-start;
         }
-        
-        /* 響應式：手機上自動變成單欄 */
+        .daily-row:last-child {
+            border-bottom: none;
+        }
+        .day-num {
+            font-weight: bold;
+            color: #7f8c8d;
+            width: 30px;
+            flex-shrink: 0;
+        }
+        .daily-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        .bible-text {
+            color: #2980b9;
+            font-weight: 500;
+        }
+        .song-text {
+            color: #16a085;
+            font-size: 13px;
+        }
+
+        /* 手機版自動變成單欄 */
         @media (max-width: 768px) {
             .two-columns {
                 grid-template-columns: 1fr;
+                gap: 10px;
             }
             .page-container {
                 padding: 15px;
             }
-        }
-        
-        /* 列印優化 */
-        @media print {
-            body {
-                background-color: #fff;
-                padding: 0;
-            }
-            .page-container {
-                box-shadow: none;
-                padding: 0;
-                max-width: 100%;
-            }
-            .two-columns {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
-        .song-list td:first-child {
-            width: 40px;
-            font-weight: bold;
-            color: #7f8c8d;
-        }
-        .bible-list td:first-child {
-            width: 40px;
-            font-weight: bold;
-            color: #7f8c8d;
         }
     </style>
 </head>
@@ -137,168 +117,250 @@
 
 <div class="page-container">
     
-    <!-- 讀經表部分 -->
-    <div class="table-section">
-        <div class="header">
-            <h1>早上親主TEAM讀經表-神的奧秘</h1>
-            <p>快讀:詩篇126-5、撒母耳記下、列王紀上、下</p>
-            <p>此讀經表只作參考，各親近主Team或個人可因應需要作出調整</p>
-            <p>(1/建議B/S聖經時找住一個重點主題，集中去默想及隨從聖靈引導發展默想，並向主作出回應敬拜)</p>
-            <p>另建議可抽其他時間快讀︰詩篇126-5、撒母耳記下、列王紀上、下及至少一節雅歌</p>
-            <div class="month-tag">(11/2026)</div>
-        </div>
-
-        <div class="two-columns">
-            <!-- 左欄：第 1-15 日 -->
-            <div>
-                <div class="group-title">(進入真理)</div>
-                <table class="bible-list">
-                    <tr><td>1.</td><td>太十六13-18 / 詩126 / 撒下13-14</td></tr>
-                    <tr><td>2.</td><td>約十六12-14 / 詩127 / 撒下15-16</td></tr>
-                </table>
-                
-                <div class="group-title">(神的奧秘就是基督)</div>
-                <table class="bible-list">
-                    <tr><td>3.</td><td>西二1-3 / 詩128 / 撒下17-18</td></tr>
-                    <tr><td>4.</td><td>西二4-7 / 詩129 / 撒下19-20</td></tr>
-                    <tr><td>5.</td><td>西二8-12 / 詩130 / 撒下21-22</td></tr>
-                    <tr><td>6.</td><td>林前二1-5 / 詩131 / 撒下23-24</td></tr>
-                    <tr><td>7.</td><td>林前二7-10 / 詩132 / 王上1-2</td></tr>
-                    <tr><td>8.</td><td>林前一18-21 / 詩133 / 王上3-4</td></tr>
-                    <tr><td>9.</td><td>林前一22-25 / 詩134 / 王上5-6</td></tr>
-                    <tr><td>10.</td><td>林後四3-6 / 詩135 / 王上7-8</td></tr>
-                    <tr><td>11.</td><td>西一24-27 / 詩136 / 王上9-10</td></tr>
-                </table>
-
-                <div class="group-title">(基督的奧秘-教會)</div>
-                <table class="bible-list">
-                    <tr><td>12.</td><td>弗三2-6 / 詩137 / 王上11-12</td></tr>
-                    <tr><td>13.</td><td>弗三7-9 / 詩138 / 王上13-14</td></tr>
-                    <tr><td>14.</td><td>弗三10-13 / 詩139 / 王上15-16</td></tr>
-                </table>
-                
-                <div class="group-title">(與基督相連的奧秘)</div>
-                <table class="bible-list">
-                    <tr><td>15.</td><td>弗五25-27 / 詩140 / 王上17-18</td></tr>
-                </table>
-            </div>
-
-            <!-- 右欄：第 16-30 日 -->
-            <div>
-                <table class="bible-list" style="margin-top: 41px;">
-                    <tr><td>16.</td><td>弗五28-32 / 詩141 / 王上19-20</td></tr>
-                    <tr><td>17.</td><td>提前三15 / 詩142 / 王上21-22</td></tr>
-                    <tr><td>18.</td><td>提前三16 / 詩143 / 王下1-2</td></tr>
-                    <tr><td>19.</td><td>弗六18-20 / 詩144 / 王下3-4</td></tr>
-                    <tr><td>20.</td><td>西四2-4 / 詩145 / 王下5-6</td></tr>
-                    <tr><td>21.</td><td>羅十六25-27 / 詩146 / 王下7-8</td></tr>
-                    <tr><td>22.</td><td>林前十五50-54 / 詩147 / 王下9-10</td></tr>
-                </table>
-
-                <div class="group-title">(敬虔的奧秘-肉身顯現)</div>
-                <table class="bible-list">
-                    <tr><td>23.</td><td>太廿二41-46 / 詩148 / 王下11-12</td></tr>
-                    <tr><td>24.</td><td>來二5-9 / 詩149 / 王下13-14</td></tr>
-                    <tr><td>25.</td><td>來二14-15 / 詩150 / 王下15-16</td></tr>
-                    <tr><td>26.</td><td>腓二5-8 / 詩1 / 王下17-18</td></tr>
-                    <tr><td>27.</td><td>腓二9-11 / 詩2 / 王下19-20</td></tr>
-                </table>
-
-                <div class="group-title">(作奧秘事管家)</div>
-                <table class="bible-list">
-                    <tr><td>28.</td><td>腓三8-9 / 詩3 / 王下21-22</td></tr>
-                    <tr><td>29.</td><td>腓三10-12 / 詩4 / 王下23-24</td></tr>
-                    <tr><td>30.</td><td>西一9-11 / 詩5 / 王下25</td></tr>
-                </table>
-            </div>
-        </div>
+    <div class="header">
+        <h1>早上親主TEAM讀經表-神的奧秘</h1>
+        <p>快讀:詩篇126-5、撒母耳記下、列王紀上、下</p>
+        <p>此讀經表只作參考，各親近主Team或個人可因應需要作出調整</p>
+        <p>(建議B/S聖經時找住一個重點主題，集中去默想及隨從聖靈引導發展默想，並向主作出回應敬拜)</p>
+        <p>另建議可抽其他時間快讀︰詩篇126-5、撒母耳記下、列王紀上、下及至少一節雅歌</p>
+        <div class="month-tag">(11/2026)</div>
+        <p style="font-size: 12px; color: #888; margin-top: 10px;">(溫馨提示：藍字為當日經文，綠字為當日參考詩歌)</p>
     </div>
 
-    <hr style="border: 1px solid #eee; margin: 40px 0;">
-
-    <!-- 唱詩表部分 -->
-    <div class="table-section">
-        <div class="header">
-            <h1>早上親主TEAM唱詩表︰無限者與我愛的永約</h1>
-            <p>此唱詩表只作參考，各親近主Team可因應需要作出調整</p>
-            <p>(2/每天除唱鑽石詩歌外，以下詩歌供參考作Team敬拜)</p>
-            <div class="month-tag">(11/2026)</div>
-        </div>
-
-        <div class="two-columns">
-            <!-- 左欄：第 1-15 日 -->
-            <div>
-                <div class="group-title">(愛的永約)</div>
-                <table class="song-list">
-                    <tr><td>1.</td><td>19冊7</td></tr>
-                    <tr><td>2.</td><td>19冊17(1,2,5段)</td></tr>
-                    <tr><td>3.</td><td>19冊55</td></tr>
-                    <tr><td>4.</td><td>19冊56(1-3段)</td></tr>
-                </table>
-                
-                <div class="group-title">(新約的福)</div>
-                <table class="song-list">
-                    <tr><td>5.</td><td>合訂1冊177</td></tr>
-                </table>
-
-                <div class="group-title">(從神生)</div>
-                <table class="song-list">
-                    <tr><td>6.</td><td>12冊11</td></tr>
-                    <tr><td>7.</td><td>合訂2冊29</td></tr>
-                    <tr><td>8.</td><td>合訂2冊19</td></tr>
-                </table>
-
-                <div class="group-title">(基督內住)</div>
-                <table class="song-list">
-                    <tr><td>9.</td><td>11冊91</td></tr>
-                    <tr><td>10.</td><td>11冊16(2,3段)</td></tr>
-                    <tr><td>11.</td><td>13冊8</td></tr>
-                    <tr><td>12.</td><td>12冊55</td></tr>
-                </table>
-
-                <div class="group-title">(與主聯合)</div>
-                <table class="song-list">
-                    <tr><td>13.</td><td>合訂1冊95</td></tr>
-                    <tr><td>14.</td><td>合訂1冊92</td></tr>
-                    <tr><td>15.</td><td>合訂2冊54</td></tr>
-                </table>
+    <div class="two-columns">
+        
+        <!-- 左欄：第 1 至 15 日 -->
+        <div>
+            <div class="group-title">(進入真理)</div>
+            <div class="daily-row">
+                <div class="day-num">1.</div>
+                <div class="daily-content">
+                    <div class="bible-text">太十六13-18 / 詩126 / 撒下13-14</div>
+                    <div class="song-text">🎵 詩歌：19冊7</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">2.</div>
+                <div class="daily-content">
+                    <div class="bible-text">約十六12-14 / 詩127 / 撒下15-16</div>
+                    <div class="song-text">🎵 詩歌：19冊17(1,2,5段)</div>
+                </div>
             </div>
 
-            <!-- 右欄：第 16-30 日 -->
-            <div>
-                <table class="song-list" style="margin-top: 41px;">
-                    <tr><td>16.</td><td>13冊34</td></tr>
-                    <tr><td>17.</td><td>合訂1冊91(1,3,6)</td></tr>
-                    <tr><td>18.</td><td>合訂1冊35(1,3,5,7段)</td></tr>
-                    <tr><td>19.</td><td>合訂1冊35(2,4,6,8段)</td></tr>
-                    <tr><td>20.</td><td>合訂1冊15</td></tr>
-                </table>
+            <div class="group-title">(神的奧秘就是基督)</div>
+            <div class="daily-row">
+                <div class="day-num">3.</div>
+                <div class="daily-content">
+                    <div class="bible-text">西二1-3 / 詩128 / 撒下17-18</div>
+                    <div class="song-text">🎵 詩歌：19冊55</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">4.</div>
+                <div class="daily-content">
+                    <div class="bible-text">西二4-7 / 詩129 / 撒下19-20</div>
+                    <div class="song-text">🎵 詩歌：19冊56(1-3段)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">5.</div>
+                <div class="daily-content">
+                    <div class="bible-text">西二8-12 / 詩130 / 撒下21-22</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊177</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">6.</div>
+                <div class="daily-content">
+                    <div class="bible-text">林前二1-5 / 詩131 / 撒下23-24</div>
+                    <div class="song-text">🎵 詩歌：12冊11</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">7.</div>
+                <div class="daily-content">
+                    <div class="bible-text">林前二7-10 / 詩132 / 王上1-2</div>
+                    <div class="song-text">🎵 詩歌：合訂2冊29</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">8.</div>
+                <div class="daily-content">
+                    <div class="bible-text">林前一18-21 / 詩133 / 王上3-4</div>
+                    <div class="song-text">🎵 詩歌：合訂2冊19</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">9.</div>
+                <div class="daily-content">
+                    <div class="bible-text">林前一22-25 / 詩134 / 王上5-6</div>
+                    <div class="song-text">🎵 詩歌：11冊91</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">10.</div>
+                <div class="daily-content">
+                    <div class="bible-text">林後四3-6 / 詩135 / 王上7-8</div>
+                    <div class="song-text">🎵 詩歌：11冊16(2,3段)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">11.</div>
+                <div class="daily-content">
+                    <div class="bible-text">西一24-27 / 詩136 / 王上9-10</div>
+                    <div class="song-text">🎵 詩歌：13冊8</div>
+                </div>
+            </div>
 
-                <div class="group-title">(新約二福)</div>
-                <table class="song-list">
-                    <tr><td>21.</td><td>合訂1冊9</td></tr>
-                    <tr><td>22.</td><td>16冊46(1,2段)</td></tr>
-                    <tr><td>23.</td><td>合訂1冊317</td></tr>
-                    <tr><td>24.</td><td>合訂1冊8</td></tr>
-                </table>
+            <div class="group-title">(基督的奧秘-教會)</div>
+            <div class="daily-row">
+                <div class="day-num">12.</div>
+                <div class="daily-content">
+                    <div class="bible-text">弗三2-6 / 詩137 / 王上11-12</div>
+                    <div class="song-text">🎵 詩歌：12冊55</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">13.</div>
+                <div class="daily-content">
+                    <div class="bible-text">弗三7-9 / 詩138 / 王上13-14</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊95</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">14.</div>
+                <div class="daily-content">
+                    <div class="bible-text">弗三10-13 / 詩139 / 王上15-16</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊92</div>
+                </div>
+            </div>
 
-                <div class="group-title">(新約三福)</div>
-                <table class="song-list">
-                    <tr><td>25.</td><td>13冊43(1,3,5段)</td></tr>
-                    <tr><td>26.</td><td>合訂1冊154</td></tr>
-                    <tr><td>27.</td><td>19冊75(1,3,4段)</td></tr>
-                </table>
-
-                <div class="group-title">(新約四福)</div>
-                <table class="song-list">
-                    <tr><td>28.</td><td>合訂1冊164</td></tr>
-                    <tr><td>29.</td><td>合訂2冊119(1,2段)</td></tr>
-                    <tr><td>30.</td><td>21冊70</td></tr>
-                </table>
+            <div class="group-title">(與基督相連的奧秘)</div>
+            <div class="daily-row">
+                <div class="day-num">15.</div>
+                <div class="daily-content">
+                    <div class="bible-text">弗五25-27 / 詩140 / 王上17-18</div>
+                    <div class="song-text">🎵 詩歌：合訂2冊54</div>
+                </div>
             </div>
         </div>
+
+        <!-- 右欄：第 16 至 30 日 -->
+        <div>
+            <div style="height: 34px;"></div> <!-- 對齊左邊的標題空間 -->
+            
+            <div class="daily-row">
+                <div class="day-num">16.</div>
+                <div class="daily-content">
+                    <div class="bible-text">弗五28-32 / 詩141 / 王上19-20</div>
+                    <div class="song-text">🎵 詩歌：13冊34</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">17.</div>
+                <div class="daily-content">
+                    <div class="bible-text">提前三15 / 詩142 / 王上21-22</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊91(1,3,6)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">18.</div>
+                <div class="daily-content">
+                    <div class="bible-text">提前三16 / 詩143 / 王下1-2</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊35(1,3,5,7段)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">19.</div>
+                <div class="daily-content">
+                    <div class="bible-text">弗六18-20 / 詩144 / 王下3-4</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊35(2,4,6,8段)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">20.</div>
+                <div class="daily-content">
+                    <div class="bible-text">西四2-4 / 詩145 / 王下5-6</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊15</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">21.</div>
+                <div class="daily-content">
+                    <div class="bible-text">羅十六25-27 / 詩146 / 王下7-8</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊9</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">22.</div>
+                <div class="daily-content">
+                    <div class="bible-text">林前十五50-54 / 詩147 / 王下9-10</div>
+                    <div class="song-text">🎵 詩歌：16冊46(1,2段)</div>
+                </div>
+            </div>
+
+            <div class="group-title">(敬虔的奧秘-肉身顯現)</div>
+            <div class="daily-row">
+                <div class="day-num">23.</div>
+                <div class="daily-content">
+                    <div class="bible-text">太廿二41-46 / 詩148 / 王下11-12</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊317</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">24.</div>
+                <div class="daily-content">
+                    <div class="bible-text">來二5-9 / 詩149 / 王下13-14</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊8</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">25.</div>
+                <div class="daily-content">
+                    <div class="bible-text">來二14-15 / 詩150 / 王下15-16</div>
+                    <div class="song-text">🎵 詩歌：13冊43(1,3,5段)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">26.</div>
+                <div class="daily-content">
+                    <div class="bible-text">腓二5-8 / 詩1 / 王下17-18</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊154</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">27.</div>
+                <div class="daily-content">
+                    <div class="bible-text">腓二9-11 / 詩2 / 王下19-20</div>
+                    <div class="song-text">🎵 詩歌：19冊75(1,3,4段)</div>
+                </div>
+            </div>
+
+            <div class="group-title">(作奧秘事管家)</div>
+            <div class="daily-row">
+                <div class="day-num">28.</div>
+                <div class="daily-content">
+                    <div class="bible-text">腓三8-9 / 詩3 / 王下21-22</div>
+                    <div class="song-text">🎵 詩歌：合訂1冊164</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">29.</div>
+                <div class="daily-content">
+                    <div class="bible-text">腓三10-12 / 詩4 / 王下23-24</div>
+                    <div class="song-text">🎵 詩歌：合訂2冊119(1,2段)</div>
+                </div>
+            </div>
+            <div class="daily-row">
+                <div class="day-num">30.</div>
+                <div class="daily-content">
+                    <div class="bible-text">西一9-11 / 詩5 / 王下25</div>
+                    <div class="song-text">🎵 詩歌：21冊70</div>
+                </div>
+            </div>
+        </div>
+
     </div>
-
 </div>
 
 </body>
