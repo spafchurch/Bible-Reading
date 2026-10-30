@@ -15,7 +15,7 @@
         }
         .a4-page {
             background-color: #fff;
-            padding: 15px 30px 20px 30px; /* 減少頂部留白 */
+            padding: 20px 30px;
             width: 100%;
             max-width: 1100px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -26,56 +26,59 @@
         
         /* 頂部左右兩欄 Header */
         .header-container {
-            margin-bottom: 15px; /* 減少與下方表格的距離 */
+            margin-bottom: 15px; /* 縮小底部留白 */
         }
         .header-columns {
             display: flex;
             justify-content: space-between;
             gap: 30px;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
         }
         .header-col {
             flex: 1;
-            text-align: left; /* 全部靠左對齊 */
         }
+        /* 左邊內容全部靠左 */
         .header-col.left {
             padding-right: 10px;
+            text-align: left;
         }
+        /* 右邊內容保持置中 (如你相片所示) */
         .header-col.right {
             padding-left: 10px;
+            text-align: center;
         }
+        
         .header-col h2 {
             margin: 0 0 8px 0;
             font-size: 18px;
             color: #2c3e50;
-            text-align: center; /* 標題保持居中，保持大體感 */
         }
         .header-col p {
             margin: 3px 0;
             font-size: 13px;
             color: #333;
-            text-align: left; /* 內容靠左 */
         }
         
-        /* 中間置中的月份標籤 (已升上並放大) */
+        /* 中間置中的月份標籤 */
         .header-date {
             text-align: center;
-            margin-top: 5px;
-            margin-bottom: 5px;
+            margin-top: 5px; /* 向上貼近 */
+            margin-bottom: 15px;
         }
         .highlight {
             background-color: #ffff00;
-            padding: 4px 20px;
+            padding: 5px 25px;
             font-weight: bold;
-            font-size: 22px;
+            font-size: 24px;
             display: inline-block;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
         /* 左右兩大欄佈局 (表格主體) */
         .two-columns {
             display: flex;
             gap: 30px;
-            margin-bottom: 0; /* 底部無需額外留白 */
+            margin-bottom: 20px;
         }
         .column {
             flex: 1;
@@ -88,16 +91,16 @@
             font-weight: bold;
             border-bottom: 2px solid #333;
             padding-bottom: 5px;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             color: #2c3e50;
             background-color: #f8f9fa;
             padding: 8px 5px;
         }
 
-        /* 每一天的行 */
+        /* 每一天的行 - 增加上下行距令視覺更舒服 */
         .row {
             display: flex;
-            padding: 6px 5px;
+            padding: 9px 5px; /* 增加 padding */
             border-bottom: 1px dashed #eee;
             align-items: flex-start;
         }
@@ -112,7 +115,7 @@
         
         /* 第二欄：親近主默想 (重點) */
         .col-meditate {
-            width: 110px;
+            width: 115px;
             flex-shrink: 0;
             color: #2980b9;
             font-weight: bold;
@@ -122,27 +125,27 @@
         .col-fastread {
             flex-grow: 1;
             color: #555;
-            font-size: 13px;
-            padding-right: 10px;
+            font-size: 13.5px; /* 微調字體大細 */
+            padding-right: 15px;
         }
         
         /* 第四欄：詩歌 */
         .col-song {
-            width: 110px;
+            width: 115px;
             flex-shrink: 0;
             color: #c0392b;
             font-weight: 500;
-            font-size: 13px;
+            font-size: 13.5px;
             text-align: right;
         }
 
         /* 分組標題 */
         .group {
             font-weight: bold;
-            margin: 12px 0 6px 0;
+            margin: 15px 0 8px 0;
             color: #d35400;
             background-color: #fdf2e9;
-            padding: 5px;
+            padding: 6px;
             border-left: 4px solid #e67e22;
             font-size: 14px;
         }
@@ -150,15 +153,16 @@
         /* 手機版調整 */
         @media (max-width: 850px) {
             .a4-page { padding: 15px; font-size: 11px; }
-            .header-columns { flex-direction: column; gap: 10px; }
-            .header-col.left { padding-right: 0; padding-bottom: 10px; }
+            .header-columns { flex-direction: column; gap: 15px; }
+            .header-col.left { padding-right: 0; }
             .header-col.right { padding-left: 0; }
-            .two-columns { flex-direction: column; gap: 10px; }
+            .two-columns { flex-direction: column; gap: 15px; }
             .column { width: 100%; }
-            .col-meditate { width: 90px; }
-            .col-song { width: 90px; }
+            .col-meditate { width: 95px; }
+            .col-song { width: 95px; }
             .header-col h2 { font-size: 16px; }
             .highlight { font-size: 20px; }
+            .row { padding: 8px 5px; }
         }
     </style>
 </head>
@@ -169,15 +173,17 @@
     <!-- 頂部雙欄 Header -->
     <div class="header-container">
         <div class="header-columns">
-            <!-- 左邊：讀經表資訊 (全部靠左) -->
+            <!-- 左邊：讀經表資訊 (全靠左) -->
             <div class="header-col left">
                 <h2>早上親主TEAM讀經表-神的奧秘</h2>
                 <p>快讀:詩篇126-5、撒母耳記下、列王紀上、下</p>
                 <p>此讀經表只作參考，各親近主Team或個人可因應需要作出調整</p>
-                <p>(1/建議B/S聖經時找住一個重點主題，集中去默想及隨從聖靈引導發展默想，並向主作出回應敬拜)，另建議可抽其他時間快讀︰詩篇126-5、撒母耳記下、列王紀上、下及至少一節雅歌</p>
+                <p>
+                    (1/建議B/S聖經時找住一個重點主題，集中去默想及隨從聖靈引導發展默想，並向主作出回應敬拜)，另建議可抽其他時間快讀︰詩篇126-5、撒母耳記下、列王紀上、下及至少一節雅歌
+                </p>
             </div>
             
-            <!-- 右邊：唱詩表資訊 (全部靠左) -->
+            <!-- 右邊：唱詩表資訊 (保持置中) -->
             <div class="header-col right">
                 <h2>早上親主TEAM唱詩表︰無限者與我愛的永約</h2>
                 <p>此唱詩表只作參考，各親近主Team可因應需要作出調整</p>
@@ -185,7 +191,7 @@
             </div>
         </div>
         
-        <!-- 底部置中月份 (已升上) -->
+        <!-- 底部置中月份 (已上移並放大) -->
         <div class="header-date">
             <div class="highlight">(11/2026)</div>
         </div>
