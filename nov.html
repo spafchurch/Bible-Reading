@@ -6,21 +6,22 @@
     <title>11月親近主Team讀經表-神的奧秘</title>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #f4f7f6;
+            font-family: "Microsoft JhengHei", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #f4f4f4;
             color: #333;
             margin: 0;
-            padding: 20px;
+            padding: 15px;
             display: flex;
             justify-content: center;
         }
         .container {
-            background-color: #fff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            background-color: #fbf9f4; /* 米黃色背景，跟足你張相 */
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             padding: 20px;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
+            border: 1px solid #e0dcd3;
         }
         h1 {
             font-size: 20px;
@@ -36,12 +37,13 @@
         }
         .date-picker {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 20px;
-            border: 1px solid #ccc;
+            border: 1px solid #dcdcdc;
             border-radius: 8px;
             font-size: 16px;
             box-sizing: border-box;
+            background-color: #fff;
         }
         .progress-container {
             background-color: #e0e0e0;
@@ -63,115 +65,99 @@
             margin-bottom: 20px;
             font-weight: bold;
         }
+        
         .daily-card {
-            background-color: #f9fbfd;
-            border: 1px solid #e1e8ed;
-            border-radius: 10px;
+            background-color: #fbf9f4;
+            border: 1px solid #8c867c;
+            border-radius: 4px;
             padding: 20px;
             margin-bottom: 20px;
         }
         .day-title {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2980b9;
+            font-size: 22px;
+            font-weight: normal;
+            color: #333;
             margin-bottom: 15px;
-            border-bottom: 2px solid #ecf0f1;
-            padding-bottom: 10px;
             display: flex;
-            align-items: center;
-            flex-wrap: wrap;
+            align-items: baseline;
         }
-        .theme-tag {
-            font-size: 13px;
-            background-color: #e67e22;
-            color: #fff;
-            padding: 3px 10px;
-            border-radius: 20px;
-            margin-left: 10px;
+        .day-title span.day-num {
+            font-size: 32px;
             font-weight: bold;
-            box-shadow: 0 2px 4px rgba(230, 126, 34, 0.3);
+            margin-right: 10px;
+            line-height: 1;
         }
-        
+        .day-title span.day-week {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .day-title span.day-month {
+            font-size: 14px;
+            color: #888;
+            letter-spacing: 2px;
+        }
+
+        /* 打勾項目行 */
         .check-item {
             display: flex;
-            align-items: flex-start;
-            padding: 12px 10px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            background-color: #fff;
-            border: 1px solid #eee;
-            transition: background-color 0.2s;
+            align-items: center;
+            padding: 18px 0;
+            border-bottom: 1px dashed #dcdcdc;
         }
-        .check-item.completed {
-            background-color: #f0f0f0;
-            opacity: 0.7;
-        }
-        .check-item.completed .item-text {
-            text-decoration: line-through;
-            color: #999;
+        .check-item:last-child {
+            border-bottom: none;
         }
         
-        .check-item input[type="checkbox"] {
-            width: 22px;
-            height: 22px;
-            margin-right: 12px;
-            margin-top: 2px;
-            cursor: pointer;
+        /* 左邊標籤 (默想/詩篇/快讀) */
+        .item-label {
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            border: 1px solid #dcdcdc;
+            color: #7a756d;
+            font-size: 14px;
+            margin-right: 15px;
+            background-color: #f5f3ec;
             flex-shrink: 0;
         }
         
-        .item-content {
-            flex-grow: 1;
-        }
-        .item-text {
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 5px;
-        }
-        .item-label {
-            font-size: 12px;
-            color: #888;
-            font-weight: bold;
-            margin-bottom: 2px;
+        .check-item input[type="checkbox"] {
+            width: 24px;
+            height: 24px;
+            margin-right: 15px;
+            cursor: pointer;
+            flex-shrink: 0;
+            border: 1px solid #333;
         }
         
-        .gateway-btn {
-            display: inline-block;
-            padding: 6px 10px;
-            background-color: #e8f8f5;
-            color: #16a085;
-            border: 1px solid #16a085;
-            border-radius: 6px;
+        /* 右邊經文文字 (可點擊) */
+        .item-text {
+            font-size: 18px;
+            color: #333;
             text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-            margin-top: 5px;
+            border-bottom: 1px solid #c0c0c0;
+            padding-bottom: 2px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        .gateway-btn:active {
-            background-color: #16a085;
-            color: #fff;
+        .item-text:hover {
+            color: #2980b9;
+            border-bottom-color: #2980b9;
         }
-
-        .song-link {
-            display: inline-block;
-            padding: 6px 10px;
-            background-color: #fdf2e9;
-            color: #d35400;
-            border: 1px solid #e67e22;
-            border-radius: 6px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-            margin-top: 5px;
+        .item-text::after {
+            content: '↗';
+            font-size: 16px;
+            color: #888;
+            margin-left: 10px;
         }
-        .song-link:active {
-            background-color: #e67e22;
-            color: #fff;
-        }
-
-        .song-text {
-            color: #c0392b;
-            font-weight: bold;
+        
+        .completed .item-text {
+            color: #bdc3c7;
+            border-bottom-color: #bdc3c7;
+            text-decoration: line-through;
         }
     </style>
 </head>
@@ -189,211 +175,204 @@
     <div class="progress-text" id="progressText">本月進度：0% (0/120)</div>
 
     <div class="daily-card" id="dailyCard">
-        <div class="day-title" id="dayTitle">第 1 日</div>
-        
-        <div id="versesContainer">
-            <!-- 動態加載三段經文 -->
-        </div>
-        
-        <div id="songContainer">
-            <!-- 動態加載詩歌 -->
+        <div class="day-title" id="dayTitle"></div>
+        <div id="itemsContainer">
+            <!-- 動態加載項目 -->
         </div>
     </div>
 </div>
 
 <script>
-    // 11月數據，已將經文拆分為三段
+    // 為每一段經文建立專屬 Gateway Bible Link
     const schedule = {
         1: { 
-            verses: ["太十六13-18", "詩126", "撒下13-14"], 
-            song: "19冊7", 
-            group: "進入真理", 
-            url: "https://www.biblegateway.com/passage/?search=馬太福音+16:13-18,詩篇+126,撒母耳記下+13-14&version=CUV" 
+            meditate: { text: "太十六 13-18", url: "https://www.biblegateway.com/passage/?search=馬太福音+16:13-18&version=CUV" },
+            psalm: { text: "詩 126", url: "https://www.biblegateway.com/passage/?search=詩篇+126&version=CUV" },
+            fastread: { text: "撒下 13-14", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+13-14&version=CUV" },
+            song: "19冊7" 
         },
         2: { 
-            verses: ["約十六12-14", "詩127", "撒下15-16"], 
-            song: "19冊17(1,2,5段)", 
-            group: "進入真理", 
-            url: "https://www.biblegateway.com/passage/?search=約翰福音+16:12-14,詩篇+127,撒母耳記下+15-16&version=CUV" 
+            meditate: { text: "約十六 12-14", url: "https://www.biblegateway.com/passage/?search=約翰福音+16:12-14&version=CUV" },
+            psalm: { text: "詩 127", url: "https://www.biblegateway.com/passage/?search=詩篇+127&version=CUV" },
+            fastread: { text: "撒下 15-16", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+15-16&version=CUV" },
+            song: "19冊17(1,2,5段)" 
         },
         3: { 
-            verses: ["西二1-3", "詩128", "撒下17-18"], 
-            song: "19冊55", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:1-3,詩篇+128,撒母耳記下+17-18&version=CUV" 
+            meditate: { text: "西二 1-3", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:1-3&version=CUV" },
+            psalm: { text: "詩 128", url: "https://www.biblegateway.com/passage/?search=詩篇+128&version=CUV" },
+            fastread: { text: "撒下 17-18", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+17-18&version=CUV" },
+            song: "19冊55" 
         },
         4: { 
-            verses: ["西二4-7", "詩129", "撒下19-20"], 
-            song: "19冊56(1-3段)", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:4-7,詩篇+129,撒母耳記下+19-20&version=CUV" 
+            meditate: { text: "西二 4-7", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:4-7&version=CUV" },
+            psalm: { text: "詩 129", url: "https://www.biblegateway.com/passage/?search=詩篇+129&version=CUV" },
+            fastread: { text: "撒下 19-20", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+19-20&version=CUV" },
+            song: "19冊56(1-3段)" 
         },
         5: { 
-            verses: ["西二8-12", "詩130", "撒下21-22"], 
-            song: "合訂1冊177", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:8-12,詩篇+130,撒母耳記下+21-22&version=CUV" 
+            meditate: { text: "西二 8-12", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:8-12&version=CUV" },
+            psalm: { text: "詩 130", url: "https://www.biblegateway.com/passage/?search=詩篇+130&version=CUV" },
+            fastread: { text: "撒下 21-22", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+21-22&version=CUV" },
+            song: "合訂1冊177" 
         },
         6: { 
-            verses: ["林前二1-5", "詩131", "撒下23-24"], 
-            song: "12冊11", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:1-5,詩篇+131,撒母耳記下+23-24&version=CUV" 
+            meditate: { text: "林前二 1-5", url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:1-5&version=CUV" },
+            psalm: { text: "詩 131", url: "https://www.biblegateway.com/passage/?search=詩篇+131&version=CUV" },
+            fastread: { text: "撒下 23-24", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+23-24&version=CUV" },
+            song: "12冊11" 
         },
         7: { 
-            verses: ["林前二7-10", "詩132", "王上1-2"], 
-            song: "合訂2冊29", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:7-10,詩篇+132,列王紀上+1-2&version=CUV" 
+            meditate: { text: "林前二 7-10", url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:7-10&version=CUV" },
+            psalm: { text: "詩 132", url: "https://www.biblegateway.com/passage/?search=詩篇+132&version=CUV" },
+            fastread: { text: "王上 1-2", url: "https://www.biblegateway.com/passage/?search=列王紀上+1-2&version=CUV" },
+            song: "合訂2冊29" 
         },
         8: { 
-            verses: ["林前一18-21", "詩133", "王上3-4"], 
-            song: "合訂2冊19", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:18-21,詩篇+133,列王紀上+3-4&version=CUV" 
+            meditate: { text: "林前一 18-21", url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:18-21&version=CUV" },
+            psalm: { text: "詩 133", url: "https://www.biblegateway.com/passage/?search=詩篇+133&version=CUV" },
+            fastread: { text: "王上 3-4", url: "https://www.biblegateway.com/passage/?search=列王紀上+3-4&version=CUV" },
+            song: "合訂2冊19" 
         },
         9: { 
-            verses: ["林前一22-25", "詩134", "王上5-6"], 
-            song: "11冊91", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:22-25,詩篇+134,列王紀上+5-6&version=CUV" 
+            meditate: { text: "林前一 22-25", url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:22-25&version=CUV" },
+            psalm: { text: "詩 134", url: "https://www.biblegateway.com/passage/?search=詩篇+134&version=CUV" },
+            fastread: { text: "王上 5-6", url: "https://www.biblegateway.com/passage/?search=列王紀上+5-6&version=CUV" },
+            song: "11冊91" 
         },
         10: { 
-            verses: ["林後四3-6", "詩135", "王上7-8"], 
-            song: "11冊16(2,3段)", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=哥林多後書+4:3-6,詩篇+135,列王紀上+7-8&version=CUV" 
+            meditate: { text: "林後四 3-6", url: "https://www.biblegateway.com/passage/?search=哥林多後書+4:3-6&version=CUV" },
+            psalm: { text: "詩 135", url: "https://www.biblegateway.com/passage/?search=詩篇+135&version=CUV" },
+            fastread: { text: "王上 7-8", url: "https://www.biblegateway.com/passage/?search=列王紀上+7-8&version=CUV" },
+            song: "11冊16(2,3段)" 
         },
         11: { 
-            verses: ["西一24-27", "詩136", "王上9-10"], 
-            song: "13冊8", 
-            group: "神的奧秘就是基督", 
-            url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:24-27,詩篇+136,列王紀上+9-10&version=CUV" 
+            meditate: { text: "西一 24-27", url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:24-27&version=CUV" },
+            psalm: { text: "詩 136", url: "https://www.biblegateway.com/passage/?search=詩篇+136&version=CUV" },
+            fastread: { text: "王上 9-10", url: "https://www.biblegateway.com/passage/?search=列王紀上+9-10&version=CUV" },
+            song: "13冊8" 
         },
         12: { 
-            verses: ["弗三2-6", "詩137", "王上11-12"], 
-            song: "12冊55", 
-            group: "基督的奧秘-教會", 
-            url: "https://www.biblegateway.com/passage/?search=以弗所書+3:2-6,詩篇+137,列王紀上+11-12&version=CUV" 
+            meditate: { text: "弗三 2-6", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:2-6&version=CUV" },
+            psalm: { text: "詩 137", url: "https://www.biblegateway.com/passage/?search=詩篇+137&version=CUV" },
+            fastread: { text: "王上 11-12", url: "https://www.biblegateway.com/passage/?search=列王紀上+11-12&version=CUV" },
+            song: "12冊55" 
         },
         13: { 
-            verses: ["弗三7-9", "詩138", "王上13-14"], 
-            song: "合訂1冊95", 
-            group: "基督的奧秘-教會", 
-            url: "https://www.biblegateway.com/passage/?search=以弗所書+3:7-9,詩篇+138,列王紀上+13-14&version=CUV" 
+            meditate: { text: "弗三 7-9", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:7-9&version=CUV" },
+            psalm: { text: "詩 138", url: "https://www.biblegateway.com/passage/?search=詩篇+138&version=CUV" },
+            fastread: { text: "王上 13-14", url: "https://www.biblegateway.com/passage/?search=列王紀上+13-14&version=CUV" },
+            song: "合訂1冊95" 
         },
         14: { 
-            verses: ["弗三10-13", "詩139", "王上15-16"], 
-            song: "合訂1冊92", 
-            group: "基督的奧秘-教會", 
-            url: "https://www.biblegateway.com/passage/?search=以弗所書+3:10-13,詩篇+139,列王紀上+15-16&version=CUV" 
+            meditate: { text: "弗三 10-13", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:10-13&version=CUV" },
+            psalm: { text: "詩 139", url: "https://www.biblegateway.com/passage/?search=詩篇+139&version=CUV" },
+            fastread: { text: "王上 15-16", url: "https://www.biblegateway.com/passage/?search=列王紀上+15-16&version=CUV" },
+            song: "合訂1冊92" 
         },
         15: { 
-            verses: ["弗五25-27", "詩140", "王上17-18"], 
-            song: "合訂2冊54", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=以弗所書+5:25-27,詩篇+140,列王紀上+17-18&version=CUV" 
+            meditate: { text: "弗五 25-27", url: "https://www.biblegateway.com/passage/?search=以弗所書+5:25-27&version=CUV" },
+            psalm: { text: "詩 140", url: "https://www.biblegateway.com/passage/?search=詩篇+140&version=CUV" },
+            fastread: { text: "王上 17-18", url: "https://www.biblegateway.com/passage/?search=列王紀上+17-18&version=CUV" },
+            song: "合訂2冊54" 
         },
         16: { 
-            verses: ["弗五28-32", "詩141", "王上19-20"], 
-            song: "13冊34", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=以弗所書+5:28-32,詩篇+141,列王紀上+19-20&version=CUV" 
+            meditate: { text: "弗五 28-32", url: "https://www.biblegateway.com/passage/?search=以弗所書+5:28-32&version=CUV" },
+            psalm: { text: "詩 141", url: "https://www.biblegateway.com/passage/?search=詩篇+141&version=CUV" },
+            fastread: { text: "王上 19-20", url: "https://www.biblegateway.com/passage/?search=列王紀上+19-20&version=CUV" },
+            song: "13冊34" 
         },
         17: { 
-            verses: ["提前三15", "詩142", "王上21-22"], 
-            song: "合訂1冊91(1,3,6)", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:15,詩篇+142,列王紀上+21-22&version=CUV" 
+            meditate: { text: "提前三 15", url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:15&version=CUV" },
+            psalm: { text: "詩 142", url: "https://www.biblegateway.com/passage/?search=詩篇+142&version=CUV" },
+            fastread: { text: "王上 21-22", url: "https://www.biblegateway.com/passage/?search=列王紀上+21-22&version=CUV" },
+            song: "合訂1冊91(1,3,6)" 
         },
         18: { 
-            verses: ["提前三16", "詩143", "王下1-2"], 
-            song: "合訂1冊35(1,3,5,7段)", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:16,詩篇+143,列王紀下+1-2&version=CUV" 
+            meditate: { text: "提前三 16", url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:16&version=CUV" },
+            psalm: { text: "詩 143", url: "https://www.biblegateway.com/passage/?search=詩篇+143&version=CUV" },
+            fastread: { text: "王下 1-2", url: "https://www.biblegateway.com/passage/?search=列王紀下+1-2&version=CUV" },
+            song: "合訂1冊35(1,3,5,7段)" 
         },
         19: { 
-            verses: ["弗六18-20", "詩144", "王下3-4"], 
-            song: "合訂1冊35(2,4,6,8段)", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=以弗所書+6:18-20,詩篇+144,列王紀下+3-4&version=CUV" 
+            meditate: { text: "弗六 18-20", url: "https://www.biblegateway.com/passage/?search=以弗所書+6:18-20&version=CUV" },
+            psalm: { text: "詩 144", url: "https://www.biblegateway.com/passage/?search=詩篇+144&version=CUV" },
+            fastread: { text: "王下 3-4", url: "https://www.biblegateway.com/passage/?search=列王紀下+3-4&version=CUV" },
+            song: "合訂1冊35(2,4,6,8段)" 
         },
         20: { 
-            verses: ["西四2-4", "詩145", "王下5-6"], 
-            song: "合訂1冊15", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=歌羅西書+4:2-4,詩篇+145,列王紀下+5-6&version=CUV" 
+            meditate: { text: "西四 2-4", url: "https://www.biblegateway.com/passage/?search=歌羅西書+4:2-4&version=CUV" },
+            psalm: { text: "詩 145", url: "https://www.biblegateway.com/passage/?search=詩篇+145&version=CUV" },
+            fastread: { text: "王下 5-6", url: "https://www.biblegateway.com/passage/?search=列王紀下+5-6&version=CUV" },
+            song: "合訂1冊15" 
         },
         21: { 
-            verses: ["羅十六25-27", "詩146", "王下7-8"], 
-            song: "合訂1冊9", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=羅馬書+16:25-27,詩篇+146,列王紀下+7-8&version=CUV" 
+            meditate: { text: "羅十六 25-27", url: "https://www.biblegateway.com/passage/?search=羅馬書+16:25-27&version=CUV" },
+            psalm: { text: "詩 146", url: "https://www.biblegateway.com/passage/?search=詩篇+146&version=CUV" },
+            fastread: { text: "王下 7-8", url: "https://www.biblegateway.com/passage/?search=列王紀下+7-8&version=CUV" },
+            song: "合訂1冊9" 
         },
         22: { 
-            verses: ["林前十五50-54", "詩147", "王下9-10"], 
-            song: "16冊46(1,2段)", 
-            group: "與基督相連的奧秘", 
-            url: "https://www.biblegateway.com/passage/?search=哥林多前書+15:50-54,詩篇+147,列王紀下+9-10&version=CUV" 
+            meditate: { text: "林前十五 50-54", url: "https://www.biblegateway.com/passage/?search=哥林多前書+15:50-54&version=CUV" },
+            psalm: { text: "詩 147", url: "https://www.biblegateway.com/passage/?search=詩篇+147&version=CUV" },
+            fastread: { text: "王下 9-10", url: "https://www.biblegateway.com/passage/?search=列王紀下+9-10&version=CUV" },
+            song: "16冊46(1,2段)" 
         },
         23: { 
-            verses: ["太廿二41-46", "詩148", "王下11-12"], 
-            song: "合訂1冊317", 
-            group: "敬虔的奧秘-肉身顯現", 
-            url: "https://www.biblegateway.com/passage/?search=馬太福音+22:41-46,詩篇+148,列王紀下+11-12&version=CUV" 
+            meditate: { text: "太廿二 41-46", url: "https://www.biblegateway.com/passage/?search=馬太福音+22:41-46&version=CUV" },
+            psalm: { text: "詩 148", url: "https://www.biblegateway.com/passage/?search=詩篇+148&version=CUV" },
+            fastread: { text: "王下 11-12", url: "https://www.biblegateway.com/passage/?search=列王紀下+11-12&version=CUV" },
+            song: "合訂1冊317" 
         },
         24: { 
-            verses: ["來二5-9", "詩149", "王下13-14"], 
-            song: "合訂1冊8", 
-            group: "敬虔的奧秘-肉身顯現", 
-            url: "https://www.biblegateway.com/passage/?search=希伯來書+2:5-9,詩篇+149,列王紀下+13-14&version=CUV" 
+            meditate: { text: "來二 5-9", url: "https://www.biblegateway.com/passage/?search=希伯來書+2:5-9&version=CUV" },
+            psalm: { text: "詩 149", url: "https://www.biblegateway.com/passage/?search=詩篇+149&version=CUV" },
+            fastread: { text: "王下 13-14", url: "https://www.biblegateway.com/passage/?search=列王紀下+13-14&version=CUV" },
+            song: "合訂1冊8" 
         },
         25: { 
-            verses: ["來二14-15", "詩150", "王下15-16"], 
-            song: "13冊43(1,3,5段)", 
-            group: "敬虔的奧秘-肉身顯現", 
-            url: "https://www.biblegateway.com/passage/?search=希伯來書+2:14-15,詩篇+150,列王紀下+15-16&version=CUV" 
+            meditate: { text: "來二 14-15", url: "https://www.biblegateway.com/passage/?search=希伯來書+2:14-15&version=CUV" },
+            psalm: { text: "詩 150", url: "https://www.biblegateway.com/passage/?search=詩篇+150&version=CUV" },
+            fastread: { text: "王下 15-16", url: "https://www.biblegateway.com/passage/?search=列王紀下+15-16&version=CUV" },
+            song: "13冊43(1,3,5段)" 
         },
         26: { 
-            verses: ["腓二5-8", "詩1", "王下17-18"], 
-            song: "合訂1冊154", 
-            group: "敬虔的奧秘-肉身顯現", 
-            url: "https://www.biblegateway.com/passage/?search=腓立比書+2:5-8,詩篇+1,列王紀下+17-18&version=CUV" 
+            meditate: { text: "腓二 5-8", url: "https://www.biblegateway.com/passage/?search=腓立比書+2:5-8&version=CUV" },
+            psalm: { text: "詩 1", url: "https://www.biblegateway.com/passage/?search=詩篇+1&version=CUV" },
+            fastread: { text: "王下 17-18", url: "https://www.biblegateway.com/passage/?search=列王紀下+17-18&version=CUV" },
+            song: "合訂1冊154" 
         },
         27: { 
-            verses: ["腓二9-11", "詩2", "王下19-20"], 
-            song: "19冊75(1,3,4段)", 
-            group: "敬虔的奧秘-肉身顯現", 
-            url: "https://www.biblegateway.com/passage/?search=腓立比書+2:9-11,詩篇+2,列王紀下+19-20&version=CUV" 
+            meditate: { text: "腓二 9-11", url: "https://www.biblegateway.com/passage/?search=腓立比書+2:9-11&version=CUV" },
+            psalm: { text: "詩 2", url: "https://www.biblegateway.com/passage/?search=詩篇+2&version=CUV" },
+            fastread: { text: "王下 19-20", url: "https://www.biblegateway.com/passage/?search=列王紀下+19-20&version=CUV" },
+            song: "19冊75(1,3,4段)" 
         },
         28: { 
-            verses: ["腓三8-9", "詩3", "王下21-22"], 
-            song: "合訂1冊164", 
-            group: "作奧秘事管家", 
-            url: "https://www.biblegateway.com/passage/?search=腓立比書+3:8-9,詩篇+3,列王紀下+21-22&version=CUV" 
+            meditate: { text: "腓三 8-9", url: "https://www.biblegateway.com/passage/?search=腓立比書+3:8-9&version=CUV" },
+            psalm: { text: "詩 3", url: "https://www.biblegateway.com/passage/?search=詩篇+3&version=CUV" },
+            fastread: { text: "王下 21-22", url: "https://www.biblegateway.com/passage/?search=列王紀下+21-22&version=CUV" },
+            song: "合訂1冊164" 
         },
         29: { 
-            verses: ["腓三10-12", "詩4", "王下23-24"], 
-            song: "合訂2冊119(1,2段)", 
-            group: "作奧秘事管家", 
-            url: "https://www.biblegateway.com/passage/?search=腓立比書+3:10-12,詩篇+4,列王紀下+23-24&version=CUV" 
+            meditate: { text: "腓三 10-12", url: "https://www.biblegateway.com/passage/?search=腓立比書+3:10-12&version=CUV" },
+            psalm: { text: "詩 4", url: "https://www.biblegateway.com/passage/?search=詩篇+4&version=CUV" },
+            fastread: { text: "王下 23-24", url: "https://www.biblegateway.com/passage/?search=列王紀下+23-24&version=CUV" },
+            song: "合訂2冊119(1,2段)" 
         },
         30: { 
-            verses: ["西一9-11", "詩5", "王下25"], 
-            song: "21冊70", 
-            group: "作奧秘事管家", 
-            url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:9-11,詩篇+5,列王紀下+25&version=CUV" 
+            meditate: { text: "西一 9-11", url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:9-11&version=CUV" },
+            psalm: { text: "詩 5", url: "https://www.biblegateway.com/passage/?search=詩篇+5&version=CUV" },
+            fastread: { text: "王下 25", url: "https://www.biblegateway.com/passage/?search=列王紀下+25&version=CUV" },
+            song: "21冊70" 
         }
     };
 
     const datePicker = document.getElementById('datePicker');
     const dayTitle = document.getElementById('dayTitle');
-    const versesContainer = document.getElementById('versesContainer');
-    const songContainer = document.getElementById('songContainer');
+    const itemsContainer = document.getElementById('itemsContainer');
     const progressBar = document.getElementById('progressBar');
     const progressText = document.getElementById('progressText');
 
-    // 自動獲取當天日期
     const today = new Date();
     const currentYear = today.getFullYear();
     const currentMonth = String(today.getMonth() + 1).padStart(2, '0');
@@ -407,21 +386,16 @@
     function updateProgress(year, month) {
         let completedCount = 0;
         const daysInMonth = new Date(year, month, 0).getDate();
-        const totalDays = Math.min(daysInMonth, 30); // 11月只有30天
-        const totalItems = totalDays * 4; // 每日4個項目 (3段經文 + 1首詩歌)
+        const totalDays = Math.min(daysInMonth, 30);
+        const totalItems = totalDays * 4; 
 
         for (let i = 1; i <= totalDays; i++) {
             const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
-            // 檢查3段經文
-            for (let j = 1; j <= 3; j++) {
-                if (localStorage.getItem(getStorageKey(dateStr, 'verse' + j)) === 'true') {
+            ['meditate', 'psalm', 'fastread', 'song'].forEach(type => {
+                if (localStorage.getItem(getStorageKey(dateStr, type)) === 'true') {
                     completedCount++;
                 }
-            }
-            // 檢查詩歌
-            if (localStorage.getItem(getStorageKey(dateStr, 'song')) === 'true') {
-                completedCount++;
-            }
+            });
         }
 
         const percentage = Math.round((completedCount / totalItems) * 100);
@@ -429,21 +403,16 @@
         progressText.innerText = `本月進度：${percentage}% (${completedCount}/${totalItems})`;
     }
 
-    function createCheckItem(dateStr, type, label, text, extraHtml = '') {
+    function createCheckItem(dateStr, type, label, text, url) {
         const isChecked = localStorage.getItem(getStorageKey(dateStr, type)) === 'true';
+        
         const itemDiv = document.createElement('div');
         itemDiv.className = 'check-item' + (isChecked ? ' completed' : '');
         
-        itemDiv.innerHTML = `
-            <input type="checkbox" id="chk_${type}" ${isChecked ? 'checked' : ''}>
-            <div class="item-content">
-                <div class="item-label">${label}</div>
-                <div class="item-text">${text}</div>
-                ${extraHtml}
-            </div>
-        `;
-        
-        const checkbox = itemDiv.querySelector('input');
+        // 建立 Checkbox
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = isChecked;
         checkbox.addEventListener('change', (e) => {
             if (e.target.checked) {
                 localStorage.setItem(getStorageKey(dateStr, type), 'true');
@@ -455,7 +424,23 @@
             const dateObj = new Date(dateStr);
             updateProgress(dateObj.getFullYear(), dateObj.getMonth() + 1);
         });
-        
+
+        // 建立標籤
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'item-label';
+        labelDiv.innerText = label;
+
+        // 建立可點擊嘅文字連結
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.className = 'item-text';
+        link.innerText = text;
+
+        itemDiv.appendChild(labelDiv);
+        itemDiv.appendChild(checkbox);
+        itemDiv.appendChild(link);
+
         return itemDiv;
     }
 
@@ -464,43 +449,35 @@
         const day = dateObj.getDate();
         const year = dateObj.getFullYear();
         const month = dateObj.getMonth() + 1;
+        const weekDayNames = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+        const weekDay = weekDayNames[dateObj.getDay()];
+        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
 
-        if (day > 30) return; // 11月最多30日
+        if (day > 30) return;
 
         const data = schedule[day];
         if (data) {
-            // 設定標題
-            const themeHtml = data.group ? `<span class="theme-tag">${data.group}</span>` : '';
-            dayTitle.innerHTML = `第 ${day} 日 ${themeHtml}`;
+            // 設定大標題 (例如：23 星期五 / OCT)
+            dayTitle.innerHTML = `
+                <div style="display:flex; align-items:baseline; width:100%;">
+                    <span class="day-num">${day}</span>
+                    <span class="day-week">${weekDay}</span>
+                    <span class="day-month" style="margin-left:auto;">${monthNames[month-1]}</span>
+                </div>
+            `;
             
-            // 清空容器
-            versesContainer.innerHTML = '';
-            songContainer.innerHTML = '';
+            itemsContainer.innerHTML = '';
 
-            // 1. 加入 Gateway Bible 總按鈕
-            const gatewayBtn = document.createElement('a');
-            gatewayBtn.href = data.url;
-            gatewayBtn.target = '_blank';
-            gatewayBtn.className = 'gateway-btn';
-            gatewayBtn.style.width = '100%';
-            gatewayBtn.style.textAlign = 'center';
-            gatewayBtn.style.marginBottom = '15px';
-            gatewayBtn.innerHTML = '📖 一次過打開今日所有經文 (Gateway Bible)';
-            versesContainer.appendChild(gatewayBtn);
-
-            // 2. 加入三段經文打勾
-            const verseLabels = ["第一段經文", "第二段經文", "第三段經文"];
-            data.verses.forEach((verse, index) => {
-                const type = 'verse' + (index + 1);
-                const item = createCheckItem(dateStr, type, verseLabels[index], verse);
-                versesContainer.appendChild(item);
-            });
-
-            // 3. 加入詩歌打勾
+            // 默想
+            itemsContainer.appendChild(createCheckItem(dateStr, 'meditate', '默想', data.meditate.text, data.meditate.url));
+            // 詩篇
+            itemsContainer.appendChild(createCheckItem(dateStr, 'psalm', '詩篇', data.psalm.text, data.psalm.url));
+            // 快讀
+            itemsContainer.appendChild(createCheckItem(dateStr, 'fastread', '快讀', data.fastread.text, data.fastread.url));
+            
+            // 詩歌
             const songSearchUrl = `https://churchofgod.org.hk/hymns/?s=${encodeURIComponent(data.song)}`;
-            const songExtra = `<a href="${songSearchUrl}" target="_blank" class="song-link">🎵 前往教會網站搜尋此詩歌</a>`;
-            const songItem = createCheckItem(dateStr, 'song', '第四項：詩歌', `<span class="song-text">${data.song}</span>`, songExtra);
-            songContainer.appendChild(songItem);
+            itemsContainer.appendChild(createCheckItem(dateStr, 'song', '詩歌', data.song, songSearchUrl));
         }
 
         updateProgress(year, month);
@@ -510,7 +487,6 @@
         loadDayData(e.target.value);
     });
 
-    // 首次載入
     loadDayData(datePicker.value);
 
 </script>
