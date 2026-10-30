@@ -28,6 +28,22 @@
         .header-container {
             margin-bottom: 15px;
         }
+
+        /* 搬上頂部嘅月份標籤 */
+        .header-date {
+            text-align: center;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .highlight {
+            background-color: #ffff00;
+            padding: 5px 25px;
+            font-weight: bold;
+            font-size: 24px;
+            display: inline-block;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+        }
+
         .header-columns {
             display: flex;
             justify-content: space-between;
@@ -55,20 +71,6 @@
             margin: 3px 0;
             font-size: 13px;
             color: #333;
-        }
-        
-        .header-date {
-            text-align: center;
-            margin-top: 5px;
-            margin-bottom: 15px;
-        }
-        .highlight {
-            background-color: #ffff00;
-            padding: 5px 25px;
-            font-weight: bold;
-            font-size: 24px;
-            display: inline-block;
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
         }
 
         /* 左右兩大欄佈局 */
@@ -128,7 +130,7 @@
 
         /* 第四欄：詩歌主題 */
         .col-song-theme {
-            width: 85px; /* 稍微加闊以容納四隻字 */
+            width: 85px; 
             flex-shrink: 0;
             color: #888;
             font-size: 12px;
@@ -181,6 +183,12 @@
     
     <!-- 頂部雙欄 Header -->
     <div class="header-container">
+        
+        <!-- 【已搬上頂】置中月份 -->
+        <div class="header-date">
+            <div class="highlight">(11/2026)</div>
+        </div>
+
         <div class="header-columns">
             <!-- 左邊：讀經表資訊 -->
             <div class="header-col left">
@@ -200,10 +208,6 @@
             </div>
         </div>
         
-        <!-- 底部置中月份 -->
-        <div class="header-date">
-            <div class="highlight">(11/2026)</div>
-        </div>
     </div>
 
     <!-- 表格主體 (左右各 15 日) -->
