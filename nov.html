@@ -38,7 +38,6 @@
     </div>
 </div>
 <script>
-    // 使用極簡數據格式，減少出錯機會
     var schedule = {
         1: { m: "太十六 13-18", p: "詩 126", f: "撒下 13-14", s: "19冊7" },
         2: { m: "約十六 12-14", p: "詩 127", f: "撒下 15-16", s: "19冊17(1,2,5段)" },
@@ -166,13 +165,22 @@
         updateProgress(y, m);
     }
 
-    // 初始化
+    // 初始化（加入防呆機制）
     window.onload = function() {
         var today = new Date();
         var y = today.getFullYear();
-        var m = (today.getMonth()+1).toString().padStart(2, '0');
-        var d = today.getDate().toString().padStart(2, '0');
-        var initDate = y + '-' + m + '-' + d;
+        var m = today.getMonth() + 1; // 1-12
+        var d = today.getDate();
+
+        // 【核心修正】如果而家唔係 11 月，就強制預設顯示 11月1日
+        if (m !== 11) {
+            m = 11;
+            d = 1;
+        }
+
+        var mStr = m.toString().padStart(2, '0');
+        var dStr = d.toString().padStart(2, '0');
+        var initDate = y + '-' + mStr + '-' + dStr;
         
         var picker = document.getElementById('datePicker');
         picker.value = initDate;
