@@ -156,6 +156,14 @@
             border-bottom-color: #bdc3c7;
             text-decoration: line-through;
         }
+        .error-msg {
+            color: red;
+            background: #ffe6e6;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -164,6 +172,8 @@
     <h1>享受神的奧秘</h1>
     <div class="subtitle">早上親主team讀經表 (11/2026)</div>
     
+    <div id="errorBox"></div>
+
     <input type="date" id="datePicker" class="date-picker">
     
     <div class="progress-container">
@@ -180,195 +190,44 @@
 </div>
 
 <script>
-    // 已加入 &interface=print 強制純中文顯示，去除中英對照
-    const schedule = {
-        1: { 
-            meditate: { text: "太十六 13-18", url: "https://www.biblegateway.com/passage/?search=馬太福音+16:13-18&version=CUV&interface=print" },
-            psalm: { text: "詩 126", url: "https://www.biblegateway.com/passage/?search=詩篇+126&version=CUV&interface=print" },
-            fastread: { text: "撒下 13-14", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+13-14&version=CUV&interface=print" },
-            song: "19冊7" 
-        },
-        2: { 
-            meditate: { text: "約十六 12-14", url: "https://www.biblegateway.com/passage/?search=約翰福音+16:12-14&version=CUV&interface=print" },
-            psalm: { text: "詩 127", url: "https://www.biblegateway.com/passage/?search=詩篇+127&version=CUV&interface=print" },
-            fastread: { text: "撒下 15-16", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+15-16&version=CUV&interface=print" },
-            song: "19冊17(1,2,5段)" 
-        },
-        3: { 
-            meditate: { text: "西二 1-3", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:1-3&version=CUV&interface=print" },
-            psalm: { text: "詩 128", url: "https://www.biblegateway.com/passage/?search=詩篇+128&version=CUV&interface=print" },
-            fastread: { text: "撒下 17-18", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+17-18&version=CUV&interface=print" },
-            song: "19冊55" 
-        },
-        4: { 
-            meditate: { text: "西二 4-7", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:4-7&version=CUV&interface=print" },
-            psalm: { text: "詩 129", url: "https://www.biblegateway.com/passage/?search=詩篇+129&version=CUV&interface=print" },
-            fastread: { text: "撒下 19-20", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+19-20&version=CUV&interface=print" },
-            song: "19冊56(1-3段)" 
-        },
-        5: { 
-            meditate: { text: "西二 8-12", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:8-12&version=CUV&interface=print" },
-            psalm: { text: "詩 130", url: "https://www.biblegateway.com/passage/?search=詩篇+130&version=CUV&interface=print" },
-            fastread: { text: "撒下 21-22", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+21-22&version=CUV&interface=print" },
-            song: "合訂1冊177" 
-        },
-        6: { 
-            meditate: { text: "林前二 1-5", url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:1-5&version=CUV&interface=print" },
-            psalm: { text: "詩 131", url: "https://www.biblegateway.com/passage/?search=詩篇+131&version=CUV&interface=print" },
-            fastread: { text: "撒下 23-24", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+23-24&version=CUV&interface=print" },
-            song: "12冊11" 
-        },
-        7: { 
-            meditate: { text: "林前二 7-10", url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:7-10&version=CUV&interface=print" },
-            psalm: { text: "詩 132", url: "https://www.biblegateway.com/passage/?search=詩篇+132&version=CUV&interface=print" },
-            fastread: { text: "王上 1-2", url: "https://www.biblegateway.com/passage/?search=列王紀上+1-2&version=CUV&interface=print" },
-            song: "合訂2冊29" 
-        },
-        8: { 
-            meditate: { text: "林前一 18-21", url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:18-21&version=CUV&interface=print" },
-            psalm: { text: "詩 133", url: "https://www.biblegateway.com/passage/?search=詩篇+133&version=CUV&interface=print" },
-            fastread: { text: "王上 3-4", url: "https://www.biblegateway.com/passage/?search=列王紀上+3-4&version=CUV&interface=print" },
-            song: "合訂2冊19" 
-        },
-        9: { 
-            meditate: { text: "林前一 22-25", url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:22-25&version=CUV&interface=print" },
-            psalm: { text: "詩 134", url: "https://www.biblegateway.com/passage/?search=詩篇+134&version=CUV&interface=print" },
-            fastread: { text: "王上 5-6", url: "https://www.biblegateway.com/passage/?search=列王紀上+5-6&version=CUV&interface=print" },
-            song: "11冊91" 
-        },
-        10: { 
-            meditate: { text: "林後四 3-6", url: "https://www.biblegateway.com/passage/?search=哥林多後書+4:3-6&version=CUV&interface=print" },
-            psalm: { text: "詩 135", url: "https://www.biblegateway.com/passage/?search=詩篇+135&version=CUV&interface=print" },
-            fastread: { text: "王上 7-8", url: "https://www.biblegateway.com/passage/?search=列王紀上+7-8&version=CUV&interface=print" },
-            song: "11冊16(2,3段)" 
-        },
-        11: { 
-            meditate: { text: "西一 24-27", url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:24-27&version=CUV&interface=print" },
-            psalm: { text: "詩 136", url: "https://www.biblegateway.com/passage/?search=詩篇+136&version=CUV&interface=print" },
-            fastread: { text: "王上 9-10", url: "https://www.biblegateway.com/passage/?search=列王紀上+9-10&version=CUV&interface=print" },
-            song: "13冊8" 
-        },
-        12: { 
-            meditate: { text: "弗三 2-6", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:2-6&version=CUV&interface=print" },
-            psalm: { text: "詩 137", url: "https://www.biblegateway.com/passage/?search=詩篇+137&version=CUV&interface=print" },
-            fastread: { text: "王上 11-12", url: "https://www.biblegateway.com/passage/?search=列王紀上+11-12&version=CUV&interface=print" },
-            song: "12冊55" 
-        },
-        13: { 
-            meditate: { text: "弗三 7-9", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:7-9&version=CUV&interface=print" },
-            psalm: { text: "詩 138", url: "https://www.biblegateway.com/passage/?search=詩篇+138&version=CUV&interface=print" },
-            fastread: { text: "王上 13-14", url: "https://www.biblegateway.com/passage/?search=列王紀上+13-14&version=CUV&interface=print" },
-            song: "合訂1冊95" 
-        },
-        14: { 
-            meditate: { text: "弗三 10-13", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:10-13&version=CUV&interface=print" },
-            psalm: { text: "詩 139", url: "https://www.biblegateway.com/passage/?search=詩篇+139&version=CUV&interface=print" },
-            fastread: { text: "王上 15-16", url: "https://www.biblegateway.com/passage/?search=列王紀上+15-16&version=CUV&interface=print" },
-            song: "合訂1冊92" 
-        },
-        15: { 
-            meditate: { text: "弗五 25-27", url: "https://www.biblegateway.com/passage/?search=以弗所書+5:25-27&version=CUV&interface=print" },
-            psalm: { text: "詩 140", url: "https://www.biblegateway.com/passage/?search=詩篇+140&version=CUV&interface=print" },
-            fastread: { text: "王上 17-18", url: "https://www.biblegateway.com/passage/?search=列王紀上+17-18&version=CUV&interface=print" },
-            song: "合訂2冊54" 
-        },
-        16: { 
-            meditate: { text: "弗五 28-32", url: "https://www.biblegateway.com/passage/?search=以弗所書+5:28-32&version=CUV&interface=print" },
-            psalm: { text: "詩 141", url: "https://www.biblegateway.com/passage/?search=詩篇+141&version=CUV&interface=print" },
-            fastread: { text: "王上 19-20", url: "https://www.biblegateway.com/passage/?search=列王紀上+19-20&version=CUV&interface=print" },
-            song: "13冊34" 
-        },
-        17: { 
-            meditate: { text: "提前三 15", url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:15&version=CUV&interface=print" },
-            psalm: { text: "詩 142", url: "https://www.biblegateway.com/passage/?search=詩篇+142&version=CUV&interface=print" },
-            fastread: { text: "王上 21-22", url: "https://www.biblegateway.com/passage/?search=列王紀上+21-22&version=CUV&interface=print" },
-            song: "合訂1冊91(1,3,6)" 
-        },
-        18: { 
-            meditate: { text: "提前三 16", url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:16&version=CUV&interface=print" },
-            psalm: { text: "詩 143", url: "https://www.biblegateway.com/passage/?search=詩篇+143&version=CUV&interface=print" },
-            fastread: { text: "王下 1-2", url: "https://www.biblegateway.com/passage/?search=列王紀下+1-2&version=CUV&interface=print" },
-            song: "合訂1冊35(1,3,5,7段)" 
-        },
-        19: { 
-            meditate: { text: "弗六 18-20", url: "https://www.biblegateway.com/passage/?search=以弗所書+6:18-20&version=CUV&interface=print" },
-            psalm: { text: "詩 144", url: "https://www.biblegateway.com/passage/?search=詩篇+144&version=CUV&interface=print" },
-            fastread: { text: "王下 3-4", url: "https://www.biblegateway.com/passage/?search=列王紀下+3-4&version=CUV&interface=print" },
-            song: "合訂1冊35(2,4,6,8段)" 
-        },
-        20: { 
-            meditate: { text: "西四 2-4", url: "https://www.biblegateway.com/passage/?search=歌羅西書+4:2-4&version=CUV&interface=print" },
-            psalm: { text: "詩 145", url: "https://www.biblegateway.com/passage/?search=詩篇+145&version=CUV&interface=print" },
-            fastread: { text: "王下 5-6", url: "https://www.biblegateway.com/passage/?search=列王紀下+5-6&version=CUV&interface=print" },
-            song: "合訂1冊15" 
-        },
-        21: { 
-            meditate: { text: "羅十六 25-27", url: "https://www.biblegateway.com/passage/?search=羅馬書+16:25-27&version=CUV&interface=print" },
-            psalm: { text: "詩 146", url: "https://www.biblegateway.com/passage/?search=詩篇+146&version=CUV&interface=print" },
-            fastread: { text: "王下 7-8", url: "https://www.biblegateway.com/passage/?search=列王紀下+7-8&version=CUV&interface=print" },
-            song: "合訂1冊9" 
-        },
-        22: { 
-            meditate: { text: "林前十五 50-54", url: "https://www.biblegateway.com/passage/?search=哥林多前書+15:50-54&version=CUV&interface=print" },
-            psalm: { text: "詩 147", url: "https://www.biblegateway.com/passage/?search=詩篇+147&version=CUV&interface=print" },
-            fastread: { text: "王下 9-10", url: "https://www.biblegateway.com/passage/?search=列王紀下+9-10&version=CUV&interface=print" },
-            song: "16冊46(1,2段)" 
-        },
-        23: { 
-            meditate: { text: "太廿二 41-46", url: "https://www.biblegateway.com/passage/?search=馬太福音+22:41-46&version=CUV&interface=print" },
-            psalm: { text: "詩 148", url: "https://www.biblegateway.com/passage/?search=詩篇+148&version=CUV&interface=print" },
-            fastread: { text: "王下 11-12", url: "https://www.biblegateway.com/passage/?search=列王紀下+11-12&version=CUV&interface=print" },
-            song: "合訂1冊317" 
-        },
-        24: { 
-            meditate: { text: "來二 5-9", url: "https://www.biblegateway.com/passage/?search=希伯來書+2:5-9&version=CUV&interface=print" },
-            psalm: { text: "詩 149", url: "https://www.biblegateway.com/passage/?search=詩篇+149&version=CUV&interface=print" },
-            fastread: { text: "王下 13-14", url: "https://www.biblegateway.com/passage/?search=列王紀下+13-14&version=CUV&interface=print" },
-            song: "合訂1冊8" 
-        },
-        25: { 
-            meditate: { text: "來二 14-15", url: "https://www.biblegateway.com/passage/?search=希伯來書+2:14-15&version=CUV&interface=print" },
-            psalm: { text: "詩 150", url: "https://www.biblegateway.com/passage/?search=詩篇+150&version=CUV&interface=print" },
-            fastread: { text: "王下 15-16", url: "https://www.biblegateway.com/passage/?search=列王紀下+15-16&version=CUV&interface=print" },
-            song: "13冊43(1,3,5段)" 
-        },
-        26: { 
-            meditate: { text: "腓二 5-8", url: "https://www.biblegateway.com/passage/?search=腓立比書+2:5-8&version=CUV&interface=print" },
-            psalm: { text: "詩 1", url: "https://www.biblegateway.com/passage/?search=詩篇+1&version=CUV&interface=print" },
-            fastread: { text: "王下 17-18", url: "https://www.biblegateway.com/passage/?search=列王紀下+17-18&version=CUV&interface=print" },
-            song: "合訂1冊154" 
-        },
-        27: { 
-            meditate: { text: "腓二 9-11", url: "https://www.biblegateway.com/passage/?search=腓立比書+2:9-11&version=CUV&interface=print" },
-            psalm: { text: "詩 2", url: "https://www.biblegateway.com/passage/?search=詩篇+2&version=CUV&interface=print" },
-            fastread: { text: "王下 19-20", url: "https://www.biblegateway.com/passage/?search=列王紀下+19-20&version=CUV&interface=print" },
-            song: "19冊75(1,3,4段)" 
-        },
-        28: { 
-            meditate: { text: "腓三 8-9", url: "https://www.biblegateway.com/passage/?search=腓立比書+3:8-9&version=CUV&interface=print" },
-            psalm: { text: "詩 3", url: "https://www.biblegateway.com/passage/?search=詩篇+3&version=CUV&interface=print" },
-            fastread: { text: "王下 21-22", url: "https://www.biblegateway.com/passage/?search=列王紀下+21-22&version=CUV&interface=print" },
-            song: "合訂1冊164" 
-        },
-        29: { 
-            meditate: { text: "腓三 10-12", url: "https://www.biblegateway.com/passage/?search=腓立比書+3:10-12&version=CUV&interface=print" },
-            psalm: { text: "詩 4", url: "https://www.biblegateway.com/passage/?search=詩篇+4&version=CUV&interface=print" },
-            fastread: { text: "王下 23-24", url: "https://www.biblegateway.com/passage/?search=列王紀下+23-24&version=CUV&interface=print" },
-            song: "合訂2冊119(1,2段)" 
-        },
-        30: { 
-            meditate: { text: "西一 9-11", url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:9-11&version=CUV&interface=print" },
-            psalm: { text: "詩 5", url: "https://www.biblegateway.com/passage/?search=詩篇+5&version=CUV&interface=print" },
-            fastread: { text: "王下 25", url: "https://www.biblegateway.com/passage/?search=列王紀下+25&version=CUV&interface=print" },
-            song: "21冊70" 
-        }
+    // 捕捉所有錯誤並顯示喺畫面
+    window.onerror = function(msg, url, line) {
+        document.getElementById('errorBox').innerHTML = `<div class="error-msg">網頁發生錯誤：${msg} (行數: ${line})</div>`;
+        return false;
     };
 
-    const datePicker = document.getElementById('datePicker');
-    const dayTitle = document.getElementById('dayTitle');
-    const itemsContainer = document.getElementById('itemsContainer');
-    const progressBar = document.getElementById('progressBar');
-    const progressText = document.getElementById('progressText');
+    const schedule = {
+        1: { meditate: { text: "太十六 13-18", url: "https://www.biblegateway.com/passage/?search=馬太福音+16:13-18&version=CUV&interface=print" }, psalm: { text: "詩 126", url: "https://www.biblegateway.com/passage/?search=詩篇+126&version=CUV&interface=print" }, fastread: { text: "撒下 13-14", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+13-14&version=CUV&interface=print" }, song: "19冊7" },
+        2: { meditate: { text: "約十六 12-14", url: "https://www.biblegateway.com/passage/?search=約翰福音+16:12-14&version=CUV&interface=print" }, psalm: { text: "詩 127", url: "https://www.biblegateway.com/passage/?search=詩篇+127&version=CUV&interface=print" }, fastread: { text: "撒下 15-16", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+15-16&version=CUV&interface=print" }, song: "19冊17(1,2,5段)" },
+        3: { meditate: { text: "西二 1-3", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:1-3&version=CUV&interface=print" }, psalm: { text: "詩 128", url: "https://www.biblegateway.com/passage/?search=詩篇+128&version=CUV&interface=print" }, fastread: { text: "撒下 17-18", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+17-18&version=CUV&interface=print" }, song: "19冊55" },
+        4: { meditate: { text: "西二 4-7", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:4-7&version=CUV&interface=print" }, psalm: { text: "詩 129", url: "https://www.biblegateway.com/passage/?search=詩篇+129&version=CUV&interface=print" }, fastread: { text: "撒下 19-20", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+19-20&version=CUV&interface=print" }, song: "19冊56(1-3段)" },
+        5: { meditate: { text: "西二 8-12", url: "https://www.biblegateway.com/passage/?search=歌羅西書+2:8-12&version=CUV&interface=print" }, psalm: { text: "詩 130", url: "https://www.biblegateway.com/passage/?search=詩篇+130&version=CUV&interface=print" }, fastread: { text: "撒下 21-22", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+21-22&version=CUV&interface=print" }, song: "合訂1冊177" },
+        6: { meditate: { text: "林前二 1-5", url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:1-5&version=CUV&interface=print" }, psalm: { text: "詩 131", url: "https://www.biblegateway.com/passage/?search=詩篇+131&version=CUV&interface=print" }, fastread: { text: "撒下 23-24", url: "https://www.biblegateway.com/passage/?search=撒母耳記下+23-24&version=CUV&interface=print" }, song: "12冊11" },
+        7: { meditate: { text: "林前二 7-10", url: "https://www.biblegateway.com/passage/?search=哥林多前書+2:7-10&version=CUV&interface=print" }, psalm: { text: "詩 132", url: "https://www.biblegateway.com/passage/?search=詩篇+132&version=CUV&interface=print" }, fastread: { text: "王上 1-2", url: "https://www.biblegateway.com/passage/?search=列王紀上+1-2&version=CUV&interface=print" }, song: "合訂2冊29" },
+        8: { meditate: { text: "林前一 18-21", url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:18-21&version=CUV&interface=print" }, psalm: { text: "詩 133", url: "https://www.biblegateway.com/passage/?search=詩篇+133&version=CUV&interface=print" }, fastread: { text: "王上 3-4", url: "https://www.biblegateway.com/passage/?search=列王紀上+3-4&version=CUV&interface=print" }, song: "合訂2冊19" },
+        9: { meditate: { text: "林前一 22-25", url: "https://www.biblegateway.com/passage/?search=哥林多前書+1:22-25&version=CUV&interface=print" }, psalm: { text: "詩 134", url: "https://www.biblegateway.com/passage/?search=詩篇+134&version=CUV&interface=print" }, fastread: { text: "王上 5-6", url: "https://www.biblegateway.com/passage/?search=列王紀上+5-6&version=CUV&interface=print" }, song: "11冊91" },
+        10: { meditate: { text: "林後四 3-6", url: "https://www.biblegateway.com/passage/?search=哥林多後書+4:3-6&version=CUV&interface=print" }, psalm: { text: "詩 135", url: "https://www.biblegateway.com/passage/?search=詩篇+135&version=CUV&interface=print" }, fastread: { text: "王上 7-8", url: "https://www.biblegateway.com/passage/?search=列王紀上+7-8&version=CUV&interface=print" }, song: "11冊16(2,3段)" },
+        11: { meditate: { text: "西一 24-27", url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:24-27&version=CUV&interface=print" }, psalm: { text: "詩 136", url: "https://www.biblegateway.com/passage/?search=詩篇+136&version=CUV&interface=print" }, fastread: { text: "王上 9-10", url: "https://www.biblegateway.com/passage/?search=列王紀上+9-10&version=CUV&interface=print" }, song: "13冊8" },
+        12: { meditate: { text: "弗三 2-6", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:2-6&version=CUV&interface=print" }, psalm: { text: "詩 137", url: "https://www.biblegateway.com/passage/?search=詩篇+137&version=CUV&interface=print" }, fastread: { text: "王上 11-12", url: "https://www.biblegateway.com/passage/?search=列王紀上+11-12&version=CUV&interface=print" }, song: "12冊55" },
+        13: { meditate: { text: "弗三 7-9", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:7-9&version=CUV&interface=print" }, psalm: { text: "詩 138", url: "https://www.biblegateway.com/passage/?search=詩篇+138&version=CUV&interface=print" }, fastread: { text: "王上 13-14", url: "https://www.biblegateway.com/passage/?search=列王紀上+13-14&version=CUV&interface=print" }, song: "合訂1冊95" },
+        14: { meditate: { text: "弗三 10-13", url: "https://www.biblegateway.com/passage/?search=以弗所書+3:10-13&version=CUV&interface=print" }, psalm: { text: "詩 139", url: "https://www.biblegateway.com/passage/?search=詩篇+139&version=CUV&interface=print" }, fastread: { text: "王上 15-16", url: "https://www.biblegateway.com/passage/?search=列王紀上+15-16&version=CUV&interface=print" }, song: "合訂1冊92" },
+        15: { meditate: { text: "弗五 25-27", url: "https://www.biblegateway.com/passage/?search=以弗所書+5:25-27&version=CUV&interface=print" }, psalm: { text: "詩 140", url: "https://www.biblegateway.com/passage/?search=詩篇+140&version=CUV&interface=print" }, fastread: { text: "王上 17-18", url: "https://www.biblegateway.com/passage/?search=列王紀上+17-18&version=CUV&interface=print" }, song: "合訂2冊54" },
+        16: { meditate: { text: "弗五 28-32", url: "https://www.biblegateway.com/passage/?search=以弗所書+5:28-32&version=CUV&interface=print" }, psalm: { text: "詩 141", url: "https://www.biblegateway.com/passage/?search=詩篇+141&version=CUV&interface=print" }, fastread: { text: "王上 19-20", url: "https://www.biblegateway.com/passage/?search=列王紀上+19-20&version=CUV&interface=print" }, song: "13冊34" },
+        17: { meditate: { text: "提前三 15", url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:15&version=CUV&interface=print" }, psalm: { text: "詩 142", url: "https://www.biblegateway.com/passage/?search=詩篇+142&version=CUV&interface=print" }, fastread: { text: "王上 21-22", url: "https://www.biblegateway.com/passage/?search=列王紀上+21-22&version=CUV&interface=print" }, song: "合訂1冊91(1,3,6)" },
+        18: { meditate: { text: "提前三 16", url: "https://www.biblegateway.com/passage/?search=提摩太前書+3:16&version=CUV&interface=print" }, psalm: { text: "詩 143", url: "https://www.biblegateway.com/passage/?search=詩篇+143&version=CUV&interface=print" }, fastread: { text: "王下 1-2", url: "https://www.biblegateway.com/passage/?search=列王紀下+1-2&version=CUV&interface=print" }, song: "合訂1冊35(1,3,5,7段)" },
+        19: { meditate: { text: "弗六 18-20", url: "https://www.biblegateway.com/passage/?search=以弗所書+6:18-20&version=CUV&interface=print" }, psalm: { text: "詩 144", url: "https://www.biblegateway.com/passage/?search=詩篇+144&version=CUV&interface=print" }, fastread: { text: "王下 3-4", url: "https://www.biblegateway.com/passage/?search=列王紀下+3-4&version=CUV&interface=print" }, song: "合訂1冊35(2,4,6,8段)" },
+        20: { meditate: { text: "西四 2-4", url: "https://www.biblegateway.com/passage/?search=歌羅西書+4:2-4&version=CUV&interface=print" }, psalm: { text: "詩 145", url: "https://www.biblegateway.com/passage/?search=詩篇+145&version=CUV&interface=print" }, fastread: { text: "王下 5-6", url: "https://www.biblegateway.com/passage/?search=列王紀下+5-6&version=CUV&interface=print" }, song: "合訂1冊15" },
+        21: { meditate: { text: "羅十六 25-27", url: "https://www.biblegateway.com/passage/?search=羅馬書+16:25-27&version=CUV&interface=print" }, psalm: { text: "詩 146", url: "https://www.biblegateway.com/passage/?search=詩篇+146&version=CUV&interface=print" }, fastread: { text: "王下 7-8", url: "https://www.biblegateway.com/passage/?search=列王紀下+7-8&version=CUV&interface=print" }, song: "合訂1冊9" },
+        22: { meditate: { text: "林前十五 50-54", url: "https://www.biblegateway.com/passage/?search=哥林多前書+15:50-54&version=CUV&interface=print" }, psalm: { text: "詩 147", url: "https://www.biblegateway.com/passage/?search=詩篇+147&version=CUV&interface=print" }, fastread: { text: "王下 9-10", url: "https://www.biblegateway.com/passage/?search=列王紀下+9-10&version=CUV&interface=print" }, song: "16冊46(1,2段)" },
+        23: { meditate: { text: "太廿二 41-46", url: "https://www.biblegateway.com/passage/?search=馬太福音+22:41-46&version=CUV&interface=print" }, psalm: { text: "詩 148", url: "https://www.biblegateway.com/passage/?search=詩篇+148&version=CUV&interface=print" }, fastread: { text: "王下 11-12", url: "https://www.biblegateway.com/passage/?search=列王紀下+11-12&version=CUV&interface=print" }, song: "合訂1冊317" },
+        24: { meditate: { text: "來二 5-9", url: "https://www.biblegateway.com/passage/?search=希伯來書+2:5-9&version=CUV&interface=print" }, psalm: { text: "詩 149", url: "https://www.biblegateway.com/passage/?search=詩篇+149&version=CUV&interface=print" }, fastread: { text: "王下 13-14", url: "https://www.biblegateway.com/passage/?search=列王紀下+13-14&version=CUV&interface=print" }, song: "合訂1冊8" },
+        25: { meditate: { text: "來二 14-15", url: "https://www.biblegateway.com/passage/?search=希伯來書+2:14-15&version=CUV&interface=print" }, psalm: { text: "詩 150", url: "https://www.biblegateway.com/passage/?search=詩篇+150&version=CUV&interface=print" }, fastread: { text: "王下 15-16", url: "https://www.biblegateway.com/passage/?search=列王紀下+15-16&version=CUV&interface=print" }, song: "13冊43(1,3,5段)" },
+        26: { meditate: { text: "腓二 5-8", url: "https://www.biblegateway.com/passage/?search=腓立比書+2:5-8&version=CUV&interface=print" }, psalm: { text: "詩 1", url: "https://www.biblegateway.com/passage/?search=詩篇+1&version=CUV&interface=print" }, fastread: { text: "王下 17-18", url: "https://www.biblegateway.com/passage/?search=列王紀下+17-18&version=CUV&interface=print" }, song: "合訂1冊154" },
+        27: { meditate: { text: "腓二 9-11", url: "https://www.biblegateway.com/passage/?search=腓立比書+2:9-11&version=CUV&interface=print" }, psalm: { text: "詩 2", url: "https://www.biblegateway.com/passage/?search=詩篇+2&version=CUV&interface=print" }, fastread: { text: "王下 19-20", url: "https://www.biblegateway.com/passage/?search=列王紀下+19-20&version=CUV&interface=print" }, song: "19冊75(1,3,4段)" },
+        28: { meditate: { text: "腓三 8-9", url: "https://www.biblegateway.com/passage/?search=腓立比書+3:8-9&version=CUV&interface=print" }, psalm: { text: "詩 3", url: "https://www.biblegateway.com/passage/?search=詩篇+3&version=CUV&interface=print" }, fastread: { text: "王下 21-22", url: "https://www.biblegateway.com/passage/?search=列王紀下+21-22&version=CUV&interface=print" }, song: "合訂1冊164" },
+        29: { meditate: { text: "腓三 10-12", url: "https://www.biblegateway.com/passage/?search=腓立比書+3:10-12&version=CUV&interface=print" }, psalm: { text: "詩 4", url: "https://www.biblegateway.com/passage/?search=詩篇+4&version=CUV&interface=print" }, fastread: { text: "王下 23-24", url: "https://www.biblegateway.com/passage/?search=列王紀下+23-24&version=CUV&interface=print" }, song: "合訂2冊119(1,2段)" },
+        30: { meditate: { text: "西一 9-11", url: "https://www.biblegateway.com/passage/?search=歌羅西書+1:9-11&version=CUV&interface=print" }, psalm: { text: "詩 5", url: "https://www.biblegateway.com/passage/?search=詩篇+5&version=CUV&interface=print" }, fastread: { text: "王下 25", url: "https://www.biblegateway.com/passage/?search=列王紀下+25&version=CUV&interface=print" }, song: "21冊70" }
+    };
 
     function getStorageKey(dateStr, type) {
         return 'bible_record_' + dateStr + '_' + type;
@@ -376,12 +235,13 @@
 
     function updateProgress(year, month) {
         let completedCount = 0;
-        const daysInMonth = new Date(year, month, 0).getDate();
-        const totalDays = Math.min(daysInMonth, 30);
+        const totalDays = 30;
         const totalItems = totalDays * 4; 
 
         for (let i = 1; i <= totalDays; i++) {
-            const dateStr = `${year}-${String(month).padStart(2, '0')}-${String(i).padStart(2, '0')}`;
+            const mStr = month < 10 ? '0' + month : month;
+            const dStr = i < 10 ? '0' + i : i;
+            const dateStr = year + '-' + mStr + '-' + dStr;
             ['meditate', 'psalm', 'fastread', 'song'].forEach(type => {
                 if (localStorage.getItem(getStorageKey(dateStr, type)) === 'true') {
                     completedCount++;
@@ -390,9 +250,58 @@
         }
 
         const percentage = Math.round((completedCount / totalItems) * 100);
-        progressBar.style.width = percentage + '%';
-        progressText.innerText = `本月進度：${percentage}% (${completedCount}/${totalItems})`;
+        document.getElementById('progressBar').style.width = percentage + '%';
+        document.getElementById('progressText').innerText = `本月進度：${percentage}% (${completedCount}/${totalItems})`;
     }
 
     function createCheckItem(dateStr, type, label, text, url) {
-        const isChecked = localStorage.getItem(getStorageKey(dateStr, type)) =
+        const isChecked = localStorage.getItem(getStorageKey(dateStr, type)) === 'true';
+        
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'check-item' + (isChecked ? ' completed' : '');
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.checked = isChecked;
+        checkbox.addEventListener('change', function(e) {
+            if (e.target.checked) {
+                localStorage.setItem(getStorageKey(dateStr, type), 'true');
+                itemDiv.classList.add('completed');
+            } else {
+                localStorage.removeItem(getStorageKey(dateStr, type));
+                itemDiv.classList.remove('completed');
+            }
+            const p = dateStr.split('-');
+            updateProgress(parseInt(p[0]), parseInt(p[1]));
+        });
+
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'item-label';
+        labelDiv.innerText = label;
+
+        const link = document.createElement('a');
+        link.href = url;
+        link.target = '_blank';
+        link.className = 'item-text';
+        link.innerText = text;
+
+        itemDiv.appendChild(labelDiv);
+        itemDiv.appendChild(checkbox);
+        itemDiv.appendChild(link);
+
+        return itemDiv;
+    }
+
+    function loadDayData(dateStr) {
+        if (!dateStr) return;
+
+        const parts = dateStr.split('-');
+        if (parts.length !== 3) return;
+
+        const year = parseInt(parts[0], 10);
+        const month = parseInt(parts[1], 10);
+        const day = parseInt(parts[2], 10);
+
+        if (isNaN(year) || isNaN(month) || isNaN(day)) return;
+
+        const dayTit
