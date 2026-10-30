@@ -38,7 +38,6 @@
     </div>
 </div>
 <script>
-    // 已經將所有經卷轉換為標準名稱及阿拉伯數字 (mL, pL, fL 係專畀 Gateway 用嘅)
     var schedule = {
         1: { m: "太十六 13-18", p: "詩 126", f: "撒下 13-14", mL: "馬太福音 16:13-18", pL: "詩篇 126", fL: "撒母耳記下 13-14" },
         2: { m: "約十六 12-14", p: "詩 127", f: "撒下 15-16", mL: "約翰福音 16:12-14", pL: "詩篇 127", fL: "撒母耳記下 15-16" },
@@ -76,13 +75,13 @@
         return "https://www.biblegateway.com/passage/?search=" + encodeURIComponent(searchStr) + "&version=CUV&interface=print";
     }
 
-    function getKey(dateStr, type) { return 'bible_v4_' + dateStr + '_' + type; }
+    function getKey(dateStr, type) { return 'bible_v5_' + dateStr + '_' + type; }
 
     function updateProgress(year, month) {
         var total = 90, done = 0;
         for(var i=1; i<=30; i++) {
-            var d = i < 10 ? '0'+i : i;
-            var m = month < 10 ? '0'+month : month;
+            var d = i < 10 ? '0'+i : i.toString();
+            var m = month < 10 ? '0'+month : month.toString();
             var str = year+'-'+m+'-'+d;
             ['m','p','f'].forEach(function(t){
                 if(localStorage.getItem(getKey(str, t)) === 'true') done++;
@@ -155,7 +154,8 @@
         updateProgress(y, m);
     }
 
-    window.onload = function() {
+    // 改用 DOMContentLoaded，避免圖片未載入完而卡住
+    document.addEventListener("DOMContentLoaded", function() {
         var today = new Date();
         var y = today.getFullYear();
         var m = today.getMonth() + 1;
@@ -166,8 +166,9 @@
             d = 1;
         }
 
-        var mStr = m.toString().padStart(2, '0');
-        var dStr = d.toString().padStart(2, '0');
+        // 移除 padStart，改用最傳統寫法確保 100% 兼容
+        var mStr = m < 10 ? '0' + m : m.toString();
+        var dStr = d < 10 ? '0' + d : d.toString();
         var initDate = y + '-' + mStr + '-' + dStr;
         
         var picker = document.getElementById('datePicker');
@@ -177,7 +178,7 @@
         picker.onchange = function(e) {
             loadDay(e.target.value);
         };
-    };
+    });
 </script>
 </body>
 </html>
